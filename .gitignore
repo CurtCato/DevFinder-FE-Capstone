@@ -11,6 +11,8 @@
 # production
 /build
 
+devFinder.json
+
 # misc
 .DS_Store
 .env.local
