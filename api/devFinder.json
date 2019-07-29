@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "name": "bob",
+      "email": "bob@bob.com",
+      "password": "bob",
+      "id": 1
+    },
+    {
+      "name": "curt",
+      "email": "curt@curt.com",
+      "password": "curt",
+      "id": 2
+    }
+  ],
+  "portfolios": [
+    {
+      "userId": 1,
+      "name": "Curt Cato",
+      "languages": "jsx",
+      "apps": "apps",
+      "rate": "$5",
+      "email": "ccato829@gmail.com",
+      "location": "here",
+      "id": "3IWaouX"
+    },
+    {
+      "userId": 2,
+      "name": "Curt Cato",
+      "languages": "JS",
+      "apps": "so many",
+      "rate": "$10",
+      "email": "ccato829@gmail.com",
+      "location": "Nashville",
+      "id": "IH1NX3f"
+    }
+  ]
+}
