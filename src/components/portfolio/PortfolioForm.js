@@ -1,4 +1,49 @@
 import React, { Component } from "react";
+// import DropdownExampleMultipleSelection from "./PortfolioDropDown";
+import { Dropdown } from "semantic-ui-react";
+
+const options = [
+  {
+    key: "Python",
+    text: "Python",
+    value: "Python",
+    id: 1
+  },
+  {
+    key: "Django",
+    text: "Django",
+    value: "Django",
+    id: 2
+  },
+  {
+    key: "JSX",
+    text: "JSX",
+    value: "JSX",
+    id: 3
+  },
+  {
+    key: "C-Sharp",
+    text: "C-Sharp",
+    value: "C-Sharp",
+    id: 4
+  },
+  {
+    key: "Angular",
+    text: "Angular",
+    value: "Angular",
+    id: 5
+  }
+];
+
+const DropdownExampleMultipleSelection = () => (
+  <Dropdown
+    placeholder="Languages Known"
+    fluid
+    multiple
+    selection
+    options={options}
+  />
+);
 
 export default class PortfolioForm extends Component {
   // Set initial state
@@ -13,35 +58,46 @@ export default class PortfolioForm extends Component {
     id: ""
   };
 
-  // Update state whenever an input field is edited
   handleFieldChange = evt => {
     const stateToChange = {};
     stateToChange[evt.target.id] = evt.target.value;
     this.setState(stateToChange);
   };
 
-  constructNewPortfolio = evt => {
-    evt.preventDefault();
-      const portfolio = {
-        userId: parseInt(sessionStorage.getItem("userId")),
-        name: this.state.name,
-        languages: this.state.languages,
-        apps: this.state.apps,
-        rate: this.state.rate,
-        email: this.state.email,
-        location: this.state.location
-      };
+  handleOptionsSelected = (event, {value}) => {
+    event.preventDefault();
+      this.setState({languages:value})
+    }
 
-      // Create the event and redirect user to event list
-      this.props
-        .addPortfolio(portfolio)
-        .then(() => this.props.history.push("/portfolio"));
-  };
+
+  buildPortfolio = () => {
+    let portfolio = {
+      userId: parseInt(sessionStorage.getItem("userId")),
+      name: this.state.name,
+      languages: this.state.languages.join(" "),
+      apps: this.state.apps,
+      rate: this.state.rate,
+      email: this.state.email,
+      location: this.state.location
+    };
+    this.props.constructNewPortfolio(portfolio)
+
+}
+
+//     this.props
+//       .addPortfolio(portfolio)
+//       .then(() => this.props.history.push("/portfolio"));
+//   };
+
+  //   result(params)
 
   render() {
     return (
       <React.Fragment>
-        <form className="portfolioForm">
+        <form
+          className="portfolioForm"
+          onSubmit={this.handleOptionsSelected.bind(this)}
+        >
           <div className="form-group">
             <label htmlFor="portfolioName">Your Name</label>
             <input
@@ -53,15 +109,14 @@ export default class PortfolioForm extends Component {
               placeholder="Name"
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="languages">Languages</label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
+          <div>
+            <Dropdown
+              placeholder="Languages Known"
+              fluid multiple selection
+              options={options}
+            //   value={this.state.languages}
+              onChange={this.handleOptionsSelected}
               id="languages"
-              placeholder="Languages"
             />
           </div>
           <div className="form-group">
@@ -75,7 +130,7 @@ export default class PortfolioForm extends Component {
               placeholder="Apps"
             />
           </div>
-            <div className="form-group">
+          <div className="form-group">
             <label htmlFor="rate">Rate</label>
             <input
               type="text"
@@ -107,10 +162,13 @@ export default class PortfolioForm extends Component {
               id="location"
               placeholder="Location"
             />
-            </div>
+          </div>
           <button
             type="submit"
-            onClick={this.constructNewPortfolio}
+            onClick= {()=>{
+                this.buildPortfolio()
+                this.props.history.push("/portfolio")
+            }}
             className="btn btn-primary"
           >
             Submit

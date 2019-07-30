@@ -21,6 +21,17 @@ export default class PortfolioEditForm extends Component {
     this.setState(stateToChange);
   };
 
+  handleOptionsSelected(event){
+    event.preventDefault();
+    const selected = [];
+    for(let option of this.select.options){
+      if(option.selected){
+      	selected.push(option.value)
+      }
+    }
+    console.log(selected);
+  }
+
   updateExistingPortfolio = evt => {
     evt.preventDefault();
       const editedPortfolio = {
@@ -69,17 +80,24 @@ export default class PortfolioEditForm extends Component {
               placeholder="Name"
             />
           </div>
-          <div className="form-group">
+          <form className="form-group" onSubmit={this.handleOptionsSelected.bind(this)}>
             <label htmlFor="languages">Languages</label>
-            <input
-              type="text"
+            <select ref={node => this.select = node}
+              multiple="true"
               required
               className="form-control"
               onChange={this.handleFieldChange}
               id="languages"
               placeholder="Languages"
-            />
-          </div>
+            >
+                <option value="JSX">JSX</option>
+                <option value="Python">Python</option>
+                <option value="C-Sharp">C-Sharp</option>
+                <option value="Django">Django</option>
+                <option value="Angular">Angular</option>
+            </select>
+            <input type="submit" value="Select" />
+          </form>
           <div className="form-group">
             <label htmlFor="apps">Apps</label>
             <input
