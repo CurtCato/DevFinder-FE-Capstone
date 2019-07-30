@@ -7,8 +7,10 @@ import Register from "./authentication/Register";
 import Portfolio from "./portfolio/Portfolio";
 import PortfolioForm from "./portfolio/PortfolioForm";
 import PortfolioEditForm from "./portfolio/PortfolioEditForm";
+import PortfolioDropDown from "./portfolio/PortfolioDropDown"
+import DropdownExampleMultipleSelection from "./portfolio/PortfolioDropDown";
 
-export default class ApplicationViews extends Component {
+class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("userId") !== null;
 
   state = {
@@ -26,6 +28,15 @@ export default class ApplicationViews extends Component {
     .then(() => this.setState(newState));
 
   }
+
+  constructNewPortfolio = obj => {
+    APIManager.post(obj, "portfolios")
+      .then(()=>APIManager.getAll("portfolios"))
+      .then((portfolio) => {
+        this.setState({portfolios: portfolio})
+        // this.props.history.push("/portfolio")
+      })
+  };
 
   addUser = user => {
     return APIManager.post(user, "users")
@@ -122,6 +133,7 @@ export default class ApplicationViews extends Component {
                 {...props}
                 addPortfolio={this.addPortfolio}
                 portfolio={this.state.portfolio}
+                constructNewPortfolio={this.constructNewPortfolio}
               />
             );
           }}
@@ -154,3 +166,5 @@ export default class ApplicationViews extends Component {
     );
   }
 }
+
+export default withRouter(ApplicationViews)

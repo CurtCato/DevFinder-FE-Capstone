@@ -11,28 +11,77 @@
       "email": "curt@curt.com",
       "password": "curt",
       "id": 2
+    },
+    {
+      "name": "craig",
+      "email": "craig@craig.com",
+      "password": "craig",
+      "id": 3
+    },
+    {
+      "name": "dude",
+      "email": "dude@dude.com",
+      "password": "dude",
+      "id": 4
+    }
+  ],
+  "languages": [
+    {
+      "name": "Python",
+      "value": "Python",
+      "id": 1
+    },
+    {
+      "name": "Django",
+      "value": "Django",
+      "id": 2
+    },
+    {
+      "name": "JSX",
+      "value": "JSX",
+      "id": 3
+    },
+    {
+      "name": "C-Sharp",
+      "value": "C-sharp",
+      "id": 4
+    },
+    {
+      "name": "Angular",
+      "value": "Angular",
+      "id": 5
     }
   ],
   "portfolios": [
     {
-      "userId": 1,
-      "name": "Curt Cato",
-      "languages": "jsx",
-      "apps": "apps",
-      "rate": "$5",
-      "email": "ccato829@gmail.com",
-      "location": "here",
-      "id": "3IWaouX"
+      "userId": 3,
+      "name": "d",
+      "languages": "Python",
+      "rate": "d",
+      "apps": "d",
+      "email": "d",
+      "location": "d",
+      "id": 2
     },
     {
-      "userId": 2,
+      "userId": 3,
       "name": "Curt Cato",
-      "languages": "JS",
-      "apps": "so many",
-      "rate": "$10",
+      "languages": "Django",
+      "rate": "rate",
+      "apps": "app",
       "email": "ccato829@gmail.com",
-      "location": "Nashville",
-      "id": "IH1NX3f"
+      "location": "location",
+      "id": 3
+    },
+    {
+      "userId": 4,
+      "name": "Curt Cato",
+      "languages": "Python Django JSX C-Sharp Angular",
+      "apps": "app",
+      "rate": "rate",
+      "email": "ccato829@gmail.com",
+      "location": "location",
+      "id": 4
     }
   ]
 }

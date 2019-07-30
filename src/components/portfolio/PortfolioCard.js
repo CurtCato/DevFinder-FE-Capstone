@@ -14,8 +14,9 @@ export default class PortfolioCard extends Component {
           <p>Location: {this.props.portfolio.location}</p>
           <button
             type="button"
-            className="btn-success"
+            className="btn btn-success"
             onClick={() => {
+                console.log(this.props.portfolio)
               this.props.history.push(`/portfolio/${this.props.portfolio.id}/edit`);
             }}
           >
@@ -23,7 +24,7 @@ export default class PortfolioCard extends Component {
           </button>
           <button
             onClick={() => this.props.deletePortfolio(this.props.portfolio.id)}
-            className="btn-danger"
+            className="btn btn-danger"
           >
             Delete
           </button>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import NavBar from "./nav/NavBar";
 import ApplicationViews from "./ApplicationViews";
 import "./DevFinder.css";
@@ -14,4 +15,4 @@ class DevFinder extends Component {
   }
 }
 
-export default DevFinder;
+export default withRouter(DevFinder);
