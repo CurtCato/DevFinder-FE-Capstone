@@ -1,5 +1,40 @@
 import React, { Component } from "react";
 import APIManager from "../../APIManager/APIManager"
+import { Dropdown } from "semantic-ui-react";
+
+const options = [
+  {
+    key: "Python",
+    text: "Python",
+    value: "Python",
+    id: 1
+  },
+  {
+    key: "Django",
+    text: "Django",
+    value: "Django",
+    id: 2
+  },
+  {
+    key: "JSX",
+    text: "JSX",
+    value: "JSX",
+    id: 3
+  },
+  {
+    key: "C-Sharp",
+    text: "C-Sharp",
+    value: "C-Sharp",
+    id: 4
+  },
+  {
+    key: "Angular",
+    text: "Angular",
+    value: "Angular",
+    id: 5
+  }
+];
+
 
 export default class PortfolioEditForm extends Component {
   // Set initial state
@@ -21,16 +56,12 @@ export default class PortfolioEditForm extends Component {
     this.setState(stateToChange);
   };
 
-  handleOptionsSelected(event){
+  handleOptionsSelected = (event, {value}) => {
     event.preventDefault();
-    const selected = [];
-    for(let option of this.select.options){
-      if(option.selected){
-      	selected.push(option.value)
-      }
+      this.setState({languages:value})
     }
-    console.log(selected);
-  }
+
+
 
   updateExistingPortfolio = evt => {
     evt.preventDefault();
@@ -78,26 +109,18 @@ export default class PortfolioEditForm extends Component {
               onChange={this.handleFieldChange}
               id="name"
               placeholder="Name"
+              value={this.state.name}
             />
           </div>
-          <form className="form-group" onSubmit={this.handleOptionsSelected.bind(this)}>
-            <label htmlFor="languages">Languages</label>
-            <select ref={node => this.select = node}
-              multiple="true"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
+          <div>
+            <Dropdown
+              placeholder="Languages Known"
+              fluid multiple selection
+              options={options}
+              onChange={this.handleOptionsSelected}
               id="languages"
-              placeholder="Languages"
-            >
-                <option value="JSX">JSX</option>
-                <option value="Python">Python</option>
-                <option value="C-Sharp">C-Sharp</option>
-                <option value="Django">Django</option>
-                <option value="Angular">Angular</option>
-            </select>
-            <input type="submit" value="Select" />
-          </form>
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="apps">Apps</label>
             <input
@@ -107,6 +130,7 @@ export default class PortfolioEditForm extends Component {
               onChange={this.handleFieldChange}
               id="apps"
               placeholder="Apps"
+              value={this.state.apps}
             />
           </div>
             <div className="form-group">
@@ -118,6 +142,7 @@ export default class PortfolioEditForm extends Component {
               onChange={this.handleFieldChange}
               id="rate"
               placeholder="Rate"
+              value={this.state.rate}
             />
           </div>
           <div className="form-group">
@@ -129,6 +154,7 @@ export default class PortfolioEditForm extends Component {
               onChange={this.handleFieldChange}
               id="email"
               placeholder="Email"
+              value={this.state.email}
             />
           </div>
           <div className="form-group">

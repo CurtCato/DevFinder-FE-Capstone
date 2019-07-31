@@ -7,8 +7,8 @@ import Register from "./authentication/Register";
 import Portfolio from "./portfolio/Portfolio";
 import PortfolioForm from "./portfolio/PortfolioForm";
 import PortfolioEditForm from "./portfolio/PortfolioEditForm";
-import PortfolioDropDown from "./portfolio/PortfolioDropDown"
-import DropdownExampleMultipleSelection from "./portfolio/PortfolioDropDown";
+import PortfolioCard from "./portfolio/PortfolioCard"
+import DevList from "./dev/DevList"
 
 class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("userId") !== null;
@@ -26,7 +26,6 @@ class ApplicationViews extends Component {
     APIManager.getAll("portfolios")
     .then(portfolios => (newState.portfolios = portfolios))
     .then(() => this.setState(newState));
-
   }
 
   constructNewPortfolio = obj => {
@@ -34,7 +33,6 @@ class ApplicationViews extends Component {
       .then(()=>APIManager.getAll("portfolios"))
       .then((portfolio) => {
         this.setState({portfolios: portfolio})
-        // this.props.history.push("/portfolio")
       })
   };
 
@@ -156,7 +154,12 @@ class ApplicationViews extends Component {
           path="/devList"
           render={props => {
             if (this.isAuthenticated()) {
-              return null;
+              return (
+              <DevList
+              {...props}
+              portfolios={this.state.portfolios}
+              />
+              )
             } else {
               return <Redirect to="/" />;
             }

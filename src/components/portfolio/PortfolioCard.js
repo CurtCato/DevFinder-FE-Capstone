@@ -4,7 +4,7 @@ export default class PortfolioCard extends Component {
 
   render() {
     return (
-      <div className="card portfolioCard w-25">
+      <div className="card portfolioCard w-25 bg-light">
         <div className="card-body portfolioBody">
           <p className="card-title">Name: {this.props.portfolio.name}</p>
           <p className="card">Languages Known: {this.props.portfolio.languages}</p>

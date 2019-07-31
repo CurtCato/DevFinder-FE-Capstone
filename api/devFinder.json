@@ -23,33 +23,57 @@
       "email": "dude@dude.com",
       "password": "dude",
       "id": 4
+    },
+    {
+      "name": "dustin",
+      "email": "dustin@dustin.com",
+      "password": "dustin",
+      "id": 5
+    },
+    {
+      "name": "krystal",
+      "email": "krystal@krystal.com",
+      "password": "krystal",
+      "id": 6
     }
   ],
   "languages": [
     {
       "name": "Python",
       "value": "Python",
+      "key": "Python",
       "id": 1
     },
     {
       "name": "Django",
       "value": "Django",
+      "key": "Django",
       "id": 2
     },
     {
       "name": "JSX",
       "value": "JSX",
+      "key": "JSX",
       "id": 3
     },
     {
       "name": "C-Sharp",
       "value": "C-sharp",
+      "key": "C-sharp",
       "id": 4
     },
     {
       "name": "Angular",
       "value": "Angular",
+      "key": "Angular",
       "id": 5
+    }
+  ],
+  "devCollection": [
+    {
+      "id": 1,
+      "currentUserId": 1,
+      "userId": 2
     }
   ],
   "portfolios": [
@@ -78,10 +102,43 @@
       "name": "Curt Cato",
       "languages": "Python Django JSX C-Sharp Angular",
       "apps": "app",
-      "rate": "rate",
+      "rate": "10$",
       "email": "ccato829@gmail.com",
-      "location": "location",
+      "location": "Nashville",
       "id": 4
+    },
+    {
+      "userId": 1,
+      "name": "Bob",
+      "languages": "Django JSX C-Sharp",
+      "apps": "None",
+      "rate": "$10",
+      "email": "bob@bob.com",
+      "location": "Nashville",
+      "id": 5
+    },
+    {
+      "userId": 5,
+      "name": "Dustin Hobsin",
+      "languages": "Django JSX Angular",
+      "apps": "Many apps",
+      "rate": "$10",
+      "email": "dustin@dustin.com",
+      "location": "Nolensville",
+      "id": 6
+    },
+    {
+      "userId": 6,
+      "name": "Krystal",
+      "languages": [
+        "Django",
+        "JSX"
+      ],
+      "rate": "$10",
+      "apps": "So many",
+      "email": "krystal@krystal.com",
+      "location": "Hermitage",
+      "id": 7
     }
   ]
 }

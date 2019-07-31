@@ -18,6 +18,8 @@ class NavBar extends Component {
                         <Link className="nav-link" to="/devlist">DevList</Link>
                     </li>
                 </ul>
+                <Link className="btn btn-primary btn-sm" onClick={() => sessionStorage.clear()} to="/">Logout</Link>
+
             </nav>
         )
     }

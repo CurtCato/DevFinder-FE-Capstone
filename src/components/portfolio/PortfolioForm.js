@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import DropdownExampleMultipleSelection from "./PortfolioDropDown";
 import { Dropdown } from "semantic-ui-react";
+
 
 const options = [
   {
@@ -35,15 +35,6 @@ const options = [
   }
 ];
 
-const DropdownExampleMultipleSelection = () => (
-  <Dropdown
-    placeholder="Languages Known"
-    fluid
-    multiple
-    selection
-    options={options}
-  />
-);
 
 export default class PortfolioForm extends Component {
   // Set initial state
@@ -69,7 +60,6 @@ export default class PortfolioForm extends Component {
       this.setState({languages:value})
     }
 
-
   buildPortfolio = () => {
     let portfolio = {
       userId: parseInt(sessionStorage.getItem("userId")),
@@ -83,13 +73,6 @@ export default class PortfolioForm extends Component {
     this.props.constructNewPortfolio(portfolio)
 
 }
-
-//     this.props
-//       .addPortfolio(portfolio)
-//       .then(() => this.props.history.push("/portfolio"));
-//   };
-
-  //   result(params)
 
   render() {
     return (
@@ -114,7 +97,6 @@ export default class PortfolioForm extends Component {
               placeholder="Languages Known"
               fluid multiple selection
               options={options}
-            //   value={this.state.languages}
               onChange={this.handleOptionsSelected}
               id="languages"
             />
