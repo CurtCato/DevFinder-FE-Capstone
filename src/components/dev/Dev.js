@@ -1,3 +1,3 @@
 import React, { Component } from "react";
-import PortfolioCard from "./PortfolioCard";
+import UserCard from "./UserCard";
 

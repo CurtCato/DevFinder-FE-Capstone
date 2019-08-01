@@ -9,11 +9,11 @@ export default class DevList extends Component {
       <React.Fragment>
         <section className="cardContainer">
         <div className="devCardContainer">
-        {this.props.portfolios
-                .map(portfolio => (
+        {this.props.users
+                .map(user => (
                   <DevCard
-                    key={portfolio.id}
-                    portfolio={portfolio}
+                    key={user.id}
+                    user={user}
                     {...this.props}
                   />
                 ))}
