@@ -4,39 +4,31 @@ import { withRouter } from "react-router";
 import APIManager from "../APIManager/APIManager";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
-import Portfolio from "./portfolio/Portfolio";
-import PortfolioForm from "./portfolio/PortfolioForm";
-import PortfolioEditForm from "./portfolio/PortfolioEditForm";
-import PortfolioDropDown from "./portfolio/PortfolioDropDown"
-import DropdownExampleMultipleSelection from "./portfolio/PortfolioDropDown";
+import User from "./user/User";
+import UserForm from "./user/UserForm";
+import DevList from "./dev/DevList";
 
 class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("userId") !== null;
 
   state = {
-    portfolios: [],
-    users: []
+    users: [],
+    languages: [],
+    rates: [],
+    user: {}
   };
 
   componentDidMount() {
     const newState = {};
 
     APIManager.getAll("users")
-      .then(users => (newState.users = users));
-    APIManager.getAll("portfolios")
-    .then(portfolios => (newState.portfolios = portfolios))
-    .then(() => this.setState(newState));
-
+      .then(users => (newState.users = users))
+      APIManager.getAll("languages")
+      .then(languages => (newState.languages = languages))
+      APIManager.getAll("rates")
+      .then(rates => (newState.rates = rates))
+      .then(() => this.setState(newState));
   }
-
-  constructNewPortfolio = obj => {
-    APIManager.post(obj, "portfolios")
-      .then(()=>APIManager.getAll("portfolios"))
-      .then((portfolio) => {
-        this.setState({portfolios: portfolio})
-        // this.props.history.push("/portfolio")
-      })
-  };
 
   addUser = user => {
     return APIManager.post(user, "users")
@@ -48,31 +40,22 @@ class ApplicationViews extends Component {
       );
   };
 
-  addPortfolio = portfolio =>
-    APIManager.post(portfolio, "portfolios")
-      .then(() => APIManager.getAll("portfolios"))
-      .then(portfolios =>
+  updateUser = editedUserObject => {
+    return APIManager.patch(editedUserObject, "users")
+      .then(() => APIManager.getAll("users"))
+      .then(user => {
         this.setState({
-          portfolios: portfolios
-        })
-      );
-
-  updatePortfolio = editedPortfolioObject => {
-    return APIManager.put(editedPortfolioObject, "portfolios")
-      .then(() => APIManager.getAll("portfolios"))
-      .then(portfolios => {
-        this.setState({
-          portfolios: portfolios
+          users: user
         });
       });
   };
 
-  deletePortfolio = id => {
+  deleteUser = id => {
     console.log(id);
-    return APIManager.delete("portfolios", id)
-      .then(() => APIManager.getAll("portfolios"))
-      .then(portfolio => {
-        this.setState({ portfolios: portfolio });
+    return APIManager.delete("users", id)
+      .then(() => APIManager.getAll("users"))
+      .then(user => {
+        this.setState({ users: user });
       });
   };
 
@@ -108,14 +91,14 @@ class ApplicationViews extends Component {
 
         <Route
           exact
-          path="/portfolio"
+          path="/user"
           render={props => {
             if (this.isAuthenticated()) {
               return (
-                <Portfolio
+                <User
                   {...props}
-                  deletePortfolio={this.deletePortfolio}
-                  portfolios={this.state.portfolios}
+                  deleteUser={this.deleteUser}
+                  users={this.state.users}
                 />
               );
             } else {
@@ -124,29 +107,36 @@ class ApplicationViews extends Component {
           }}
         />
 
-        <Route
+        {/* <Route
           exact
-          path="/portfolio/new"
+          path="/user/new"
           render={props => {
             return (
-              <PortfolioForm
+              <UserForm
                 {...props}
-                addPortfolio={this.addPortfolio}
-                portfolio={this.state.portfolio}
-                constructNewPortfolio={this.constructNewPortfolio}
+                rates={this.state.rates}
+                languages={this.state.languages}
+                user={this.state.user}
+                users={this.state.users}
+                constructNewUser={this.constructNewUser}
               />
             );
           }}
-        />
+        /> */}
 
         <Route
-          path="/portfolio/:portfolioId(\d+)/edit"
+          path="/user/:userId(\d+)/edit"
           render={props => {
+            console.log(this.state.user)
             return (
-              <PortfolioEditForm
+              <UserForm
                 {...props}
-                portfolio={this.state.portfolio}
-                updatePortfolio={this.updatePortfolio}
+                rates={this.state.rates}
+                languages={this.state.languages}
+                // user={this.state.user}
+                users={this.state.users}
+                updateUser={this.updateUser}
+                // constructNewUser={this.constructNewUser}
               />
             );
           }}
@@ -156,7 +146,7 @@ class ApplicationViews extends Component {
           path="/devList"
           render={props => {
             if (this.isAuthenticated()) {
-              return null;
+              return <DevList {...props} users={this.state.users} />;
             } else {
               return <Redirect to="/" />;
             }
@@ -167,4 +157,4 @@ class ApplicationViews extends Component {
   }
 }
 
-export default withRouter(ApplicationViews)
+export default withRouter(ApplicationViews);

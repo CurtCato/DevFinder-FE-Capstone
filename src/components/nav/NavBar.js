@@ -12,12 +12,14 @@ class NavBar extends Component {
                         <Link className="nav-link" to="/dashboard">Dashboard</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/portfolio">Portfolio</Link>
+                        <Link className="nav-link" to="/user">User</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/devlist">DevList</Link>
                     </li>
                 </ul>
+                <Link className="btn btn-primary btn-sm" onClick={() => sessionStorage.clear()} to="/">Logout</Link>
+
             </nav>
         )
     }

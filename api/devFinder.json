@@ -1,87 +1,117 @@
 {
   "users": [
     {
-      "name": "bob",
-      "email": "bob@bob.com",
-      "password": "bob",
+      "name": "mo",
+      "email": "mo@mo.com",
+      "password": "mo",
+      "rates": "$10-$20",
+      "location": "location",
       "id": 1
-    },
-    {
-      "name": "curt",
-      "email": "curt@curt.com",
-      "password": "curt",
-      "id": 2
-    },
-    {
-      "name": "craig",
-      "email": "craig@craig.com",
-      "password": "craig",
-      "id": 3
-    },
-    {
-      "name": "dude",
-      "email": "dude@dude.com",
-      "password": "dude",
-      "id": 4
     }
   ],
+  "jobsCompleted": [],
   "languages": [
     {
-      "name": "Python",
+      "text": "Python",
       "value": "Python",
+      "key": "Python",
       "id": 1
     },
     {
-      "name": "Django",
+      "text": "Django",
       "value": "Django",
+      "key": "Django",
       "id": 2
     },
     {
-      "name": "JSX",
+      "text": "JSX",
       "value": "JSX",
+      "key": "JSX",
       "id": 3
     },
     {
-      "name": "C-Sharp",
+      "text": "C-Sharp",
       "value": "C-sharp",
+      "key": "C-sharp",
       "id": 4
     },
     {
-      "name": "Angular",
+      "text": "Angular",
       "value": "Angular",
+      "key": "Angular",
       "id": 5
     }
   ],
-  "portfolios": [
+  "devCollection": [
     {
-      "userId": 3,
-      "name": "d",
-      "languages": "Python",
-      "rate": "d",
-      "apps": "d",
-      "email": "d",
-      "location": "d",
+      "id": 1,
+      "currentUserId": 1,
+      "faveDevId": 2
+    },
+    {
       "id": 2
     },
     {
-      "userId": 3,
-      "name": "Curt Cato",
-      "languages": "Django",
-      "rate": "rate",
-      "apps": "app",
-      "email": "ccato829@gmail.com",
-      "location": "location",
       "id": 3
     },
     {
-      "userId": 4,
-      "name": "Curt Cato",
-      "languages": "Python Django JSX C-Sharp Angular",
-      "apps": "app",
-      "rate": "rate",
-      "email": "ccato829@gmail.com",
-      "location": "location",
       "id": 4
+    }
+  ],
+  "rates": [
+    {
+      "id": 1,
+      "rate": "$10-$20",
+      "key": "$10-$20",
+      "text": "$10-$20"
+    },
+    {
+      "id": 2,
+      "rate": "$21-$30",
+      "key": "$21-$30",
+      "text": "$21-$30"
+    },
+    {
+      "id": 3,
+      "rate": "$31-$40",
+      "key": "$31-$40",
+      "text": "$31-$40"
+    },
+    {
+      "id": 4,
+      "rate": "$41-$50",
+      "key": "$41-$50",
+      "text": "$41-$50"
+    },
+    {
+      "id": 5,
+      "rate": "$51-$60",
+      "key": "$51-$60",
+      "text": "$51-$60"
+    },
+    {
+      "id": 6,
+      "rate": "$61-$70",
+      "key": "$61-$70",
+      "text": "$61-$70"
+    },
+    {
+      "id": 7,
+      "rate": "$71-$80",
+      "key": "$71-$80",
+      "text": "$71-$80"
+    },
+    {
+      "id": 8,
+      "rate": "$81-$90",
+      "key": "$81-$90",
+      "text": "$81-$90"
+    },
+    {
+      "id": 9,
+      "rate": "$91-$100",
+      "key": "$91-$100",
+      "text": "$91-$100"
     }
   ]
 }
