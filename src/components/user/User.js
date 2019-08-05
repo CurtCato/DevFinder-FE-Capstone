@@ -29,6 +29,8 @@ export default class User extends Component {
                     key={user.id}
                     user={user}
                     {...this.props}
+                    userLanguages={this.props.userLanguages}
+                    showCurrentUserLanguages={this.props.showCurrentUserLanguages}
                   />
                 ))}
             </div>

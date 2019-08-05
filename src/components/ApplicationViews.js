@@ -5,7 +5,7 @@ import APIManager from "../APIManager/APIManager";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import User from "./user/User";
-import UserForm from "./user/UserForm";
+import UserEditForm from "./user/UserEditForm";
 import DevList from "./dev/DevList";
 
 class ApplicationViews extends Component {
@@ -15,6 +15,7 @@ class ApplicationViews extends Component {
     users: [],
     languages: [],
     rates: [],
+    userLanguages: [],
     user: {}
   };
 
@@ -23,30 +24,28 @@ class ApplicationViews extends Component {
 
     APIManager.getAll("users")
       .then(users => (newState.users = users))
-      APIManager.getAll("languages")
+      .then(() => APIManager.getAll("languages"))
       .then(languages => (newState.languages = languages))
-      APIManager.getAll("rates")
+      .then(() => APIManager.getAll("rates"))
       .then(rates => (newState.rates = rates))
-      .then(() => this.setState(newState));
+      .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
+      .then(userLanguages => newState.userLanguages = userLanguages)
+      .then(console.log(newState))
+      .then(() => this.setState(newState))
+
   }
 
   addUser = user => {
     return APIManager.post(user, "users")
       .then(() => APIManager.getAll("users"))
-      .then(users =>
-        this.setState({
-          users: users
-        })
-      );
+      .then(users => this.setState({ users: users }));
   };
 
   updateUser = editedUserObject => {
-    return APIManager.patch(editedUserObject, "users")
+    return APIManager.put(editedUserObject, "users")
       .then(() => APIManager.getAll("users"))
       .then(user => {
-        this.setState({
-          users: user
-        });
+        this.setState({ users: user });
       });
   };
 
@@ -58,6 +57,27 @@ class ApplicationViews extends Component {
         this.setState({ users: user });
       });
   };
+
+  makeUserLanguageTable = obj => {
+    return APIManager.post(obj, "userLanguages")
+      .then(() => APIManager.getAll("userLanguages"))
+      .then(language => {
+        this.setState({ languages: language });
+      });
+  };
+
+  // editUserLanguageTable = obj => {
+  //   return APIManager.patch(obj, "userLanguages")
+  //     .then(() => APIManager.getAll("userLanguages"))
+  //     .then(language => {
+  //       this.setState({ languages: language });
+  //     });
+  // };
+
+  showCurrentUserLanguages = (languages) => {
+    return languages.filter(language => language.userId === parseInt(sessionStorage.getItem("userId"))
+    );
+  }
 
   render() {
     return (
@@ -74,12 +94,21 @@ class ApplicationViews extends Component {
           exact
           path="/register"
           render={props => {
-            return <Register {...props} addUser={this.addUser} />;
+            return (
+              <Register
+                {...props}
+                addUser={this.addUser}
+                makeUserLanguageTable={this.makeUserLanguageTable}
+                rates={this.state.rates}
+                languages={this.state.languages}
+                userLanguages={this.state.userLanguages}
+              />
+            );
           }}
         />
 
         <Route
-          path="/dashboard"
+          path="/favDevs"
           render={props => {
             if (this.isAuthenticated()) {
               return null;
@@ -94,11 +123,14 @@ class ApplicationViews extends Component {
           path="/user"
           render={props => {
             if (this.isAuthenticated()) {
+              console.log("route render", this.state.userLanguages)
               return (
                 <User
                   {...props}
                   deleteUser={this.deleteUser}
                   users={this.state.users}
+                  userLanguages={this.state.userLanguages}
+                  showCurrentUserLanguages={this.showCurrentUserLanguages}
                 />
               );
             } else {
@@ -107,36 +139,18 @@ class ApplicationViews extends Component {
           }}
         />
 
-        {/* <Route
-          exact
-          path="/user/new"
-          render={props => {
-            return (
-              <UserForm
-                {...props}
-                rates={this.state.rates}
-                languages={this.state.languages}
-                user={this.state.user}
-                users={this.state.users}
-                constructNewUser={this.constructNewUser}
-              />
-            );
-          }}
-        /> */}
-
         <Route
           path="/user/:userId(\d+)/edit"
           render={props => {
-            console.log(this.state.user)
             return (
-              <UserForm
+              <UserEditForm
                 {...props}
                 rates={this.state.rates}
+                userLanguages={this.state.userLanguages}
                 languages={this.state.languages}
-                // user={this.state.user}
                 users={this.state.users}
                 updateUser={this.updateUser}
-                // constructNewUser={this.constructNewUser}
+                makeLanguageOptions={this.makeUserLanguageOptions}
               />
             );
           }}
@@ -146,7 +160,9 @@ class ApplicationViews extends Component {
           path="/devList"
           render={props => {
             if (this.isAuthenticated()) {
-              return <DevList {...props} users={this.state.users} />;
+              return <DevList {...props}
+                users={this.state.users}
+                languages={this.state.userLanguages} />;
             } else {
               return <Redirect to="/" />;
             }

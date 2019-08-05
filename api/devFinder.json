@@ -1,12 +1,32 @@
 {
   "users": [
     {
-      "name": "mo",
-      "email": "mo@mo.com",
-      "password": "mo",
-      "rates": "$10-$20",
-      "location": "location",
+      "name": "me",
+      "email": "me@me.com",
+      "password": "me",
+      "rates": "$21-$30",
+      "location": "nss",
       "id": 1
+    },
+    {
+      "name": "sam",
+      "email": "sam@sam.com",
+      "password": "sam",
+      "rates": "$21-$30",
+      "location": "nss",
+      "id": 2
+    }
+  ],
+  "userLanguages": [
+    {
+      "languageId": 5,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "languageId": 1,
+      "userId": 2,
+      "id": 2
     }
   ],
   "jobsCompleted": [],
@@ -47,15 +67,6 @@
       "id": 1,
       "currentUserId": 1,
       "faveDevId": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
     }
   ],
   "rates": [

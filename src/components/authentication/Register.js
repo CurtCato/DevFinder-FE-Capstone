@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import APIManager from "../../APIManager/APIManager";
+import { Dropdown } from "semantic-ui-react";
 
 export default class Register extends Component {
   state = {
@@ -7,7 +8,8 @@ export default class Register extends Component {
     rates: "",
     email: "",
     password: "",
-    location: ""
+    location: "",
+    userLanguages: ""
   };
 
   handleFieldChange = evt => {
@@ -29,7 +31,10 @@ export default class Register extends Component {
       } else if (
         this.state.name === "" ||
         this.state.email === "" ||
-        this.state.password === ""
+        this.state.password === "" ||
+        this.state.rates === "" ||
+        this.state.location === ""
+        // this.state.userLanguages === ""
       ) {
         window.alert("You left a field blank!");
       } else {
@@ -47,16 +52,70 @@ export default class Register extends Component {
               users.find(user => user.password === this.state.password)
             )
             .then(foundUser => sessionStorage.setItem("userId", foundUser.id))
-            .then(() => this.props.history.push("/dashboard"))
+            .then(()=>{
+              this.state.languages.forEach(language => {
+                let userLanguage = {};
+                userLanguage.languageId = language;
+                userLanguage.userId = parseInt(
+                  sessionStorage.getItem("userId")
+                );
+                this.props.makeUserLanguageTable(userLanguage);
+              })
+            })
+            .then(() => this.props.history.push("/user"))
         );
       }
     });
   };
 
+  handleOptionSelected = (event, { value }) => {
+    event.preventDefault();
+    this.setState({ rates: value });
+  };
+
+  rateOptions = [];
+  makeRateOptions() {
+    this.props.rates.map(rate => {
+      const rateOption = {
+        id: rate.id,
+        value: rate.rate,
+        key: rate.key,
+        text: rate.text
+      };
+      this.rateOptions.push(rateOption);
+    });
+  }
+
+  handleOptionsSelected = (event, { value }) => {
+    event.preventDefault();
+    this.setState({ languages: value });
+  };
+
+  languageOptions = [];
+  makeLanguageOptions() {
+    this.props.languages.map(language => {
+      const languageOption = {
+        key: language.key,
+        text: language.text,
+        value: language.id,
+        id: language.id
+      };
+      this.languageOptions.push(languageOption);
+    });
+  }
+
   render() {
+    if (this.languageOptions.length === 0) {
+      this.makeLanguageOptions();
+    }
+    if (this.rateOptions.length === 0) {
+      this.makeRateOptions();
+    }
     return (
-      <form onSubmit={this.handleRegister}>
-        <h1 className="h3 mb-3 font-weight-normal">Please Sign Up</h1>
+      <form className="card" onSubmit={this.handleRegister}>
+        <h1 className="h3 mb-3 font-weight-normal">
+          Please Create Your User Portfolio
+        </h1>
         <label htmlFor="inputName">Name:&nbsp;</label>
         <input
           onChange={this.handleFieldChange}
@@ -85,6 +144,40 @@ export default class Register extends Component {
           placeholder="Password"
           required=""
         />
+        <div>
+          <label htmlFor="languages">Select Known Languages:&nbsp;</label>
+          <Dropdown
+            placeholder="Languages Known"
+            fluid
+            multiple
+            selection
+            options={this.languageOptions}
+            onChange={this.handleOptionsSelected}
+            id="languages"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="rate">Desired Hourly Rate&nbsp;</label>
+          <Dropdown
+            placeholder="Hourly Rate Desired"
+            fluid
+            selection
+            options={this.rateOptions}
+            onChange={this.handleOptionSelected}
+            id="rates"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="location">Location&nbsp;</label>
+          <input
+            type="text"
+            required
+            className="form-control"
+            onChange={this.handleFieldChange}
+            id="location"
+            placeholder="Location"
+          />
+        </div>
         <br />
         <button type="submit" className="btn btn-info btn-sm login-button">
           Register
