@@ -74,15 +74,15 @@ class ApplicationViews extends Component {
 
   postUserLanguageObj = obj => {
     return APIManager.post(obj, "userLanguages")
-      .then(() => APIManager.getAll("userLanguages"))
-      .then(language => {
-        console.log("language", language)
-        return this.setState({ languages: language });
+      .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
+      .then(languages => {
+        console.log("languages", languages)
+        return this.setState({ userLanguages: languages });
       });
   };
 
-  showCurrentUserLanguages = languages => {
-    return languages.filter(
+  showCurrentUserLanguages = () => {
+    return this.state.userLanguages.filter(
       language => language.userId === parseInt(sessionStorage.getItem("userId"))
     );
   };
@@ -121,12 +121,13 @@ class ApplicationViews extends Component {
           render={props => {
             if (this.isAuthenticated()) {
               console.log("route render", this.state.userLanguages);
+              let currentUserLanguages = this.showCurrentUserLanguages()
               return (
                 <User
                   {...props}
                   deleteUser={this.deleteUser}
                   users={this.state.users}
-                  userLanguages={this.state.userLanguages}
+                  userLanguages={currentUserLanguages}
                   showCurrentUserLanguages={this.showCurrentUserLanguages}
                 />
               );

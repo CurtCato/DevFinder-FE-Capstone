@@ -10,7 +10,6 @@ export default class UserEditForm extends Component {
     email: "",
     githubLink: "",
     location: "",
-    // password: "",
     userLanguages: "",
     id: parseInt(sessionStorage.getItem("userId"))
   };
@@ -44,7 +43,6 @@ export default class UserEditForm extends Component {
     });
     this.props.updateUser(user);
     this.props.history.push("/user");
-    // .then(window.location.reload());
   };
 
   rateOptions = [];
@@ -172,7 +170,7 @@ export default class UserEditForm extends Component {
               className="form-control"
               onChange={this.handleFieldChange}
               id="apps"
-              placeholder="Apps"
+              placeholder={currentUser.githubLink}
             />
           </div>
           <div className="form-group">

@@ -2,17 +2,6 @@ import React, { Component } from "react";
 
 export default class UserCard extends Component {
 
-  state = {
-    currentUserLanguages: []
-  }
-
-  componentDidMount() {
-    let currentUserLanguages = this.props.showCurrentUserLanguages(
-      this.props.userLanguages
-    );
-    this.setState({ currentUserLanguages:currentUserLanguages })
-  }
-
   render() {
     return (
       <div className="card userCard w-50 h-75 py-4 m-5 px-4 bg-light">
@@ -20,7 +9,7 @@ export default class UserCard extends Component {
           <h1 className="card-title">Name: {this.props.user.name}</h1>
           <h3 className="languagesKnown">
             Languages Known:
-            {this.state.currentUserLanguages.map(language => (
+            {this.props.userLanguages.map(language => (
               <div key={language.id}>- {language.language.text}</div>
             ))}
           </h3>

@@ -8,23 +8,6 @@ export default class DevCard extends Component {
     id: ""
   };
 
-//   postFavDevObj = obj => {
-//     return APIManager.post(obj, "devCollection")
-//       .then(() => APIManager.getAll("devCollection"))
-//       .then(favDev => {
-//         this.setState({ favDevs: favDev });
-//       });
-//   };
-
-//   makeFavDevObj = () => {
-//     this.props.devCollection.forEach(dev => {
-//       let favDevObj = {};
-//       favDevObj.favDevId = this.props.user.id;
-//       favDevObj.currentUserId = parseInt(sessionStorage.getItem("userId"));
-//       this.postFavDevObj(favDevObj);
-//     });
-//   };
-
     saveDev = () => {
       const favDev = {
         currentUserId: parseInt(sessionStorage.getItem("userId")),
@@ -57,7 +40,7 @@ export default class DevCard extends Component {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={event => {
+            onClick={() => {
               this.saveDev();
               console.log(this.props.user);
               // console.log(this.props.match.params);

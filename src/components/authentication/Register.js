@@ -55,15 +55,16 @@ export default class Register extends Component {
             )
             .then(foundUser => sessionStorage.setItem("userId", foundUser.id))
             .then(() => {
-              console.log("languages state", this.state.languages)
+              let promiseArr = []
               this.state.languages.forEach(language => {
                 let userLanguage = {};
                 userLanguage.languageId = language;
                 userLanguage.userId = parseInt(
                   sessionStorage.getItem("userId")
                 );
-                return this.props.postUserLanguageObj(userLanguage);
+                 promiseArr.push(this.props.postUserLanguageObj(userLanguage));
               });
+              return Promise.all(promiseArr)
             })
             .then(() => this.props.history.push("/user"))
         );
