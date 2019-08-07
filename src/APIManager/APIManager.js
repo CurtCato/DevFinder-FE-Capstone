@@ -21,6 +21,14 @@ export default Object.create(null, {
     }
   },
 
+  getDevsExpand: {
+    value: function(resource, firstExpand ) {
+      return fetch(`${remoteURL}/${resource}/?_expand=${firstExpand}`).then(
+        data => data.json()
+      );
+    }
+  },
+
   getSorted: {
     value: function(resource, userId) {
       return fetch(`${remoteURL}/${resource}?userId=${userId}`).then(data => data.json())

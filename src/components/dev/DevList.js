@@ -14,6 +14,7 @@ export default class DevList extends Component {
                   <DevCard
                     key={user.id}
                     user={user}
+                    devCollections={this.props.devCollections}
                     languages={this.props.languages}
                     {...this.props}
                   />

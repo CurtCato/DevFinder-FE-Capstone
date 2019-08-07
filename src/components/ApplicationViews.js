@@ -7,6 +7,8 @@ import Register from "./authentication/Register";
 import User from "./user/User";
 import UserEditForm from "./user/UserEditForm";
 import DevList from "./dev/DevList";
+import DevCard from "./dev/DevCard";
+import FavDev from "./dev/FavDev";
 
 class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("userId") !== null;
@@ -15,7 +17,9 @@ class ApplicationViews extends Component {
     users: [],
     languages: [],
     rates: [],
+    githubLink: [],
     userLanguages: [],
+    devCollections: [],
     user: {}
   };
 
@@ -29,10 +33,13 @@ class ApplicationViews extends Component {
       .then(() => APIManager.getAll("rates"))
       .then(rates => (newState.rates = rates))
       .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
-      .then(userLanguages => newState.userLanguages = userLanguages)
-      .then(console.log(newState))
-      .then(() => this.setState(newState))
-
+      .then(userLanguages => (newState.userLanguages = userLanguages))
+      // .then(() => APIManager.getAll("devCollection"))
+      // .then(devCollection => (newState.devCollection = devCollection))
+      .then(() => APIManager.getDevsExpand("devCollections", "user"))
+      .then(devCollections => (newState.devCollections = devCollections))
+      .then(console.log("new state", newState))
+      .then(() => this.setState(newState));
   }
 
   addUser = user => {
@@ -58,26 +65,27 @@ class ApplicationViews extends Component {
       });
   };
 
-  makeUserLanguageTable = obj => {
+  deleteFavDev = id => {
+    return APIManager.delete("devCollections", id)
+    .then (() => dev => {
+      this.setState({ dev : dev })
+    })
+  }
+
+  postUserLanguageObj = obj => {
     return APIManager.post(obj, "userLanguages")
       .then(() => APIManager.getAll("userLanguages"))
       .then(language => {
-        this.setState({ languages: language });
+        console.log("language", language)
+        return this.setState({ languages: language });
       });
   };
 
-  // editUserLanguageTable = obj => {
-  //   return APIManager.patch(obj, "userLanguages")
-  //     .then(() => APIManager.getAll("userLanguages"))
-  //     .then(language => {
-  //       this.setState({ languages: language });
-  //     });
-  // };
-
-  showCurrentUserLanguages = (languages) => {
-    return languages.filter(language => language.userId === parseInt(sessionStorage.getItem("userId"))
+  showCurrentUserLanguages = languages => {
+    return languages.filter(
+      language => language.userId === parseInt(sessionStorage.getItem("userId"))
     );
-  }
+  };
 
   render() {
     return (
@@ -98,7 +106,7 @@ class ApplicationViews extends Component {
               <Register
                 {...props}
                 addUser={this.addUser}
-                makeUserLanguageTable={this.makeUserLanguageTable}
+                postUserLanguageObj={this.postUserLanguageObj}
                 rates={this.state.rates}
                 languages={this.state.languages}
                 userLanguages={this.state.userLanguages}
@@ -108,22 +116,11 @@ class ApplicationViews extends Component {
         />
 
         <Route
-          path="/favDevs"
-          render={props => {
-            if (this.isAuthenticated()) {
-              return null;
-            } else {
-              return <Redirect to="/" />;
-            }
-          }}
-        />
-
-        <Route
           exact
           path="/user"
           render={props => {
             if (this.isAuthenticated()) {
-              console.log("route render", this.state.userLanguages)
+              console.log("route render", this.state.userLanguages);
               return (
                 <User
                   {...props}
@@ -151,8 +148,28 @@ class ApplicationViews extends Component {
                 users={this.state.users}
                 updateUser={this.updateUser}
                 makeLanguageOptions={this.makeUserLanguageOptions}
+                postUserLanguageObj={this.postUserLanguageObj}
               />
             );
+          }}
+        />
+
+        <Route
+          path="/favDevs"
+          render={props => {
+            if (this.isAuthenticated()) {
+              return (
+               <FavDev
+                  {...props}
+                  user={this.state.users}
+                  languages={this.state.userLanguages}
+                  devCollection={this.state.devCollections}
+                  deleteFavDev={this.deleteFavDev}
+                />
+              );
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
 
@@ -160,9 +177,14 @@ class ApplicationViews extends Component {
           path="/devList"
           render={props => {
             if (this.isAuthenticated()) {
-              return <DevList {...props}
-                users={this.state.users}
-                languages={this.state.userLanguages} />;
+              return (
+                <DevList
+                  {...props}
+                  users={this.state.users}
+                  languages={this.state.userLanguages}
+                  devCollection={this.state.devCollections}
+                />
+              );
             } else {
               return <Redirect to="/" />;
             }

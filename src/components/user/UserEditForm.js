@@ -8,8 +8,9 @@ export default class UserEditForm extends Component {
     name: "",
     rates: "",
     email: "",
+    githubLink: "",
     location: "",
-    password: "",
+    // password: "",
     userLanguages: "",
     id: parseInt(sessionStorage.getItem("userId"))
   };
@@ -31,11 +32,19 @@ export default class UserEditForm extends Component {
       email: this.state.email,
       password: this.state.password,
       rates: this.state.rates,
+      githubLink: this.state.githubLink,
       location: this.state.location,
       id: this.state.id
     };
+    this.state.languages.forEach(languageId => {
+      let obj = {};
+      obj.languageId = languageId;
+      obj.userId = parseInt(sessionStorage.getItem("userId"));
+      this.props.postUserLanguageObj(obj);
+    });
     this.props.updateUser(user);
     this.props.history.push("/user");
+    // .then(window.location.reload());
   };
 
   rateOptions = [];
@@ -54,39 +63,37 @@ export default class UserEditForm extends Component {
   handleOptionsSelected = (event, { value }) => {
     event.preventDefault();
     this.setState({ languages: value });
+    return value;
   };
 
   languageOptions = this.props.languages.reduce((acc, language) => {
-      const stuff = this.props.userLanguages.filter(
-        userLanguage =>
-          userLanguage.userId === parseInt(sessionStorage.getItem("userId")) &&
-          userLanguage.languageId === language.id
-      );
+    const stuff = this.props.userLanguages.filter(
+      userLanguage =>
+        userLanguage.userId === parseInt(sessionStorage.getItem("userId")) &&
+        userLanguage.languageId === language.id
+    );
 
-      if (stuff.length === 0) {
-        const obj = {
-          key: language.key,
-          text: language.text,
-          value: language.id,
-          id: language.id
-        };
+    if (stuff.length === 0) {
+      const obj = {
+        key: language.key,
+        text: language.text,
+        value: language.id,
+        id: language.id
+      };
 
-        acc.push(obj);
-      } else {
-        console.log(acc);
-        return acc;
-      }
-
+      acc.push(obj);
+    } else {
       return acc;
-    }, []);
+    }
+
+    return acc;
+  }, []);
 
   findUser = () => {
     let currentUser = "";
     this.props.users.forEach(user => {
       if (user.id === parseInt(sessionStorage.getItem("userId"))) {
         currentUser = user;
-      } else {
-        currentUser = "no user found";
       }
     });
     return currentUser;
@@ -99,12 +106,12 @@ export default class UserEditForm extends Component {
     if (this.rateOptions.length === 0) {
       this.makeRateOptions();
     }
-
     let currentUser = this.findUser();
+    console.log(this.languageOptions);
     return (
       <React.Fragment>
         <h1>
-          Hello {currentUser.name}, this is where you edit your fucking profile.
+          Hello {currentUser.name}, this is where you edit your awesome profile.
         </h1>
         <form className="userEditForm card">
           <label className="form-group" htmlFor="inputName">
@@ -133,17 +140,17 @@ export default class UserEditForm extends Component {
             className="form-control"
           />
           <br />
-          <label className="form-group" htmlFor="inputPassword">
+          {/* <label className="form-group" htmlFor="inputPassword">
             Password:&nbsp;
-          </label>
-          <input
+          </label> */}
+          {/* <input
             onChange={this.handleFieldChange}
             type="password"
             id="password"
             placeholder="Password"
             required=""
             className="form-control"
-          />
+          /> */}
           <div>
             <label htmlFor="languages">Select Known Languages</label>
             <Dropdown
@@ -157,8 +164,8 @@ export default class UserEditForm extends Component {
               id="languages"
             />
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="apps">Apps</label>
+          <div className="form-group">
+            <label htmlFor="apps">Github link</label>
             <input
               type="text"
               required
@@ -167,7 +174,7 @@ export default class UserEditForm extends Component {
               id="apps"
               placeholder="Apps"
             />
-          </div> */}
+          </div>
           <div className="form-group">
             <label htmlFor="rate">Desired Hourly Rate</label>
             <Dropdown

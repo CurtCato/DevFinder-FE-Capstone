@@ -1,32 +1,157 @@
 {
   "users": [
     {
-      "name": "me",
-      "email": "me@me.com",
-      "password": "me",
-      "rates": "$21-$30",
-      "location": "nss",
+      "name": "Joe",
+      "email": "joe@joe.com",
+      "rates": "$41-$50",
+      "githubLink": "",
+      "location": "NSS",
       "id": 1
     },
     {
-      "name": "sam",
-      "email": "sam@sam.com",
-      "password": "sam",
+      "name": "Curt Cato",
+      "email": "ccato829@gmail.com",
+      "password": "curt",
       "rates": "$21-$30",
-      "location": "nss",
+      "githubLink": "www.github.com",
+      "location": "NSS",
       "id": 2
+    },
+    {
+      "name": "dude",
+      "email": "dude@dude.com",
+      "password": "dude",
+      "rates": "$31-$40",
+      "githubLink": "www.github.com",
+      "location": "location",
+      "id": 3
+    },
+    {
+      "name": "Curt Cato",
+      "email": "blah@blah.com",
+      "password": "password",
+      "rates": "$21-$30",
+      "githubLink": "www.github.com",
+      "location": "location",
+      "id": 4
+    },
+    {
+      "name": "cheese",
+      "email": "cheese@cheese.com",
+      "password": "cheese",
+      "rates": "$10-$20",
+      "githubLink": "www.github.com",
+      "location": "NSS",
+      "id": 5
+    },
+    {
+      "name": "key",
+      "email": "key@key.com",
+      "password": "key",
+      "rates": "$31-$40",
+      "githubLink": "www.github.com",
+      "location": "location",
+      "id": 6
+    },
+    {
+      "name": "bee",
+      "email": "bee@bee.com",
+      "password": "bee",
+      "rates": "$31-$40",
+      "githubLink": "www.github.com",
+      "location": "NSS",
+      "id": 7
+    },
+    {
+      "name": "mathew",
+      "email": "mathew@mathew.com",
+      "password": "mathew",
+      "rates": "$10-$20",
+      "githubLink": "www.github.com",
+      "location": "location",
+      "id": 8
     }
   ],
   "userLanguages": [
     {
-      "languageId": 5,
+      "languageId": 1,
       "userId": 1,
       "id": 1
     },
     {
+      "languageId": 2,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "languageId": 4,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "languageId": 5,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "languageId": 3,
+      "userId": 1,
+      "id": 5
+    },
+    {
       "languageId": 1,
       "userId": 2,
-      "id": 2
+      "id": 6
+    },
+    {
+      "languageId": 1,
+      "userId": 3,
+      "id": 7
+    },
+    {
+      "languageId": 1,
+      "userId": 4,
+      "id": 8
+    },
+    {
+      "languageId": 2,
+      "userId": 5,
+      "id": 9
+    },
+    {
+      "languageId": 1,
+      "userId": 6,
+      "id": 10
+    },
+    {
+      "languageId": 2,
+      "userId": 6,
+      "id": 11
+    },
+    {
+      "languageId": 1,
+      "userId": 7,
+      "id": 12
+    },
+    {
+      "languageId": 2,
+      "userId": 7,
+      "id": 13
+    },
+    {
+      "languageId": 1,
+      "userId": 8,
+      "id": 14
+    },
+    {
+      "languageId": 2,
+      "userId": 8,
+      "id": 15
+    },
+    {
+      "languageId": 3,
+      "userId": 8,
+      "id": 16
     }
   ],
   "jobsCompleted": [],
@@ -62,13 +187,7 @@
       "id": 5
     }
   ],
-  "devCollection": [
-    {
-      "id": 1,
-      "currentUserId": 1,
-      "faveDevId": 2
-    }
-  ],
+  "devCollections": [],
   "rates": [
     {
       "id": 1,

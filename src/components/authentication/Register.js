@@ -7,6 +7,7 @@ export default class Register extends Component {
     name: "",
     rates: "",
     email: "",
+    githubLink: "",
     password: "",
     location: "",
     userLanguages: ""
@@ -43,6 +44,7 @@ export default class Register extends Component {
           email: this.state.email,
           password: this.state.password,
           rates: this.state.rates,
+          githubLink: this.state.githubLink,
           location: this.state.location,
           userId: this.state.userId
         };
@@ -52,15 +54,16 @@ export default class Register extends Component {
               users.find(user => user.password === this.state.password)
             )
             .then(foundUser => sessionStorage.setItem("userId", foundUser.id))
-            .then(()=>{
+            .then(() => {
+              console.log("languages state", this.state.languages)
               this.state.languages.forEach(language => {
                 let userLanguage = {};
                 userLanguage.languageId = language;
                 userLanguage.userId = parseInt(
                   sessionStorage.getItem("userId")
                 );
-                this.props.makeUserLanguageTable(userLanguage);
-              })
+                return this.props.postUserLanguageObj(userLanguage);
+              });
             })
             .then(() => this.props.history.push("/user"))
         );
@@ -122,6 +125,7 @@ export default class Register extends Component {
           type="name"
           id="name"
           placeholder="Name"
+          className="form-control"
           required=""
           autoFocus=""
         />
@@ -132,6 +136,7 @@ export default class Register extends Component {
           type="email"
           id="email"
           placeholder="Email address"
+          className="form-control"
           required=""
           autoFocus=""
         />
@@ -142,8 +147,10 @@ export default class Register extends Component {
           type="password"
           id="password"
           placeholder="Password"
+          className="form-control"
           required=""
         />
+        <br />
         <div>
           <label htmlFor="languages">Select Known Languages:&nbsp;</label>
           <Dropdown
@@ -155,7 +162,21 @@ export default class Register extends Component {
             onChange={this.handleOptionsSelected}
             id="languages"
           />
+          <br />
         </div>
+        <br />
+        <div className="form-group">
+          <label htmlFor="github">Github link</label>
+          <input
+            type="text"
+            required
+            className="form-control"
+            placeholder="GitHub Link"
+            onChange={this.handleFieldChange}
+            id="githubLink"
+          />
+        </div>
+        <br />
         <div className="form-group">
           <label htmlFor="rate">Desired Hourly Rate&nbsp;</label>
           <Dropdown
@@ -166,6 +187,7 @@ export default class Register extends Component {
             onChange={this.handleOptionSelected}
             id="rates"
           />
+          <br />
         </div>
         <div className="form-group">
           <label htmlFor="location">Location&nbsp;</label>
@@ -186,7 +208,9 @@ export default class Register extends Component {
         <button
           type="button"
           className="btn btn-link"
-          onClick={() => this.props.history.push("/")}
+          onClick={
+            () => this.props.history.push("/")
+          }
         >
           Back to Login Page
         </button>
