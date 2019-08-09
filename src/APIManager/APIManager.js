@@ -14,8 +14,16 @@ export default Object.create(null, {
   },
 
   getAllExpand: {
-    value: function(resource, expandResource) {
-      return fetch(`${remoteURL}/${resource}?_expand=${expandResource}`).then(
+    value: function(resource, firstExpand, secondExpand ) {
+      return fetch(`${remoteURL}/${resource}/?_expand=${firstExpand}&_expand=${secondExpand}`).then(
+        data => data.json()
+      );
+    }
+  },
+
+  getDevsExpand: {
+    value: function(resource, firstExpand ) {
+      return fetch(`${remoteURL}/${resource}/?_expand=${firstExpand}`).then(
         data => data.json()
       );
     }

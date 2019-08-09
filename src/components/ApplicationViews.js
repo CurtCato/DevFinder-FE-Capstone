@@ -5,8 +5,10 @@ import APIManager from "../APIManager/APIManager";
 import Login from "./authentication/Login";
 import Register from "./authentication/Register";
 import User from "./user/User";
-import UserForm from "./user/UserForm";
+import UserEditForm from "./user/UserEditForm";
 import DevList from "./dev/DevList";
+import DevCard from "./dev/DevCard";
+import FavDev from "./dev/FavDev";
 
 class ApplicationViews extends Component {
   isAuthenticated = () => sessionStorage.getItem("userId") !== null;
@@ -15,6 +17,9 @@ class ApplicationViews extends Component {
     users: [],
     languages: [],
     rates: [],
+    githubLink: [],
+    userLanguages: [],
+    devCollections: [],
     user: {}
   };
 
@@ -23,30 +28,31 @@ class ApplicationViews extends Component {
 
     APIManager.getAll("users")
       .then(users => (newState.users = users))
-      APIManager.getAll("languages")
+      .then(() => APIManager.getAll("languages"))
       .then(languages => (newState.languages = languages))
-      APIManager.getAll("rates")
+      .then(() => APIManager.getAll("rates"))
       .then(rates => (newState.rates = rates))
+      .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
+      .then(userLanguages => (newState.userLanguages = userLanguages))
+      // .then(() => APIManager.getAll("devCollection"))
+      // .then(devCollection => (newState.devCollection = devCollection))
+      .then(() => APIManager.getDevsExpand("devCollections", "user"))
+      .then(devCollections => (newState.devCollections = devCollections))
+      .then(console.log("new state", newState))
       .then(() => this.setState(newState));
   }
 
   addUser = user => {
     return APIManager.post(user, "users")
       .then(() => APIManager.getAll("users"))
-      .then(users =>
-        this.setState({
-          users: users
-        })
-      );
+      .then(users => this.setState({ users: users }));
   };
 
   updateUser = editedUserObject => {
-    return APIManager.patch(editedUserObject, "users")
+    return APIManager.put(editedUserObject, "users")
       .then(() => APIManager.getAll("users"))
       .then(user => {
-        this.setState({
-          users: user
-        });
+        this.setState({ users: user });
       });
   };
 
@@ -57,6 +63,28 @@ class ApplicationViews extends Component {
       .then(user => {
         this.setState({ users: user });
       });
+  };
+
+  deleteFavDev = id => {
+    return APIManager.delete("devCollections", id)
+    .then (() => dev => {
+      this.setState({ dev : dev })
+    })
+  }
+
+  postUserLanguageObj = obj => {
+    return APIManager.post(obj, "userLanguages")
+      .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
+      .then(languages => {
+        console.log("languages", languages)
+        return this.setState({ userLanguages: languages });
+      });
+  };
+
+  showCurrentUserLanguages = () => {
+    return this.state.userLanguages.filter(
+      language => language.userId === parseInt(sessionStorage.getItem("userId"))
+    );
   };
 
   render() {
@@ -74,18 +102,16 @@ class ApplicationViews extends Component {
           exact
           path="/register"
           render={props => {
-            return <Register {...props} addUser={this.addUser} />;
-          }}
-        />
-
-        <Route
-          path="/dashboard"
-          render={props => {
-            if (this.isAuthenticated()) {
-              return null;
-            } else {
-              return <Redirect to="/" />;
-            }
+            return (
+              <Register
+                {...props}
+                addUser={this.addUser}
+                postUserLanguageObj={this.postUserLanguageObj}
+                rates={this.state.rates}
+                languages={this.state.languages}
+                userLanguages={this.state.userLanguages}
+              />
+            );
           }}
         />
 
@@ -94,11 +120,15 @@ class ApplicationViews extends Component {
           path="/user"
           render={props => {
             if (this.isAuthenticated()) {
+              console.log("route render", this.state.userLanguages);
+              let currentUserLanguages = this.showCurrentUserLanguages()
               return (
                 <User
                   {...props}
                   deleteUser={this.deleteUser}
                   users={this.state.users}
+                  userLanguages={currentUserLanguages}
+                  showCurrentUserLanguages={this.showCurrentUserLanguages}
                 />
               );
             } else {
@@ -107,38 +137,40 @@ class ApplicationViews extends Component {
           }}
         />
 
-        {/* <Route
-          exact
-          path="/user/new"
-          render={props => {
-            return (
-              <UserForm
-                {...props}
-                rates={this.state.rates}
-                languages={this.state.languages}
-                user={this.state.user}
-                users={this.state.users}
-                constructNewUser={this.constructNewUser}
-              />
-            );
-          }}
-        /> */}
-
         <Route
           path="/user/:userId(\d+)/edit"
           render={props => {
-            console.log(this.state.user)
             return (
-              <UserForm
+              <UserEditForm
                 {...props}
                 rates={this.state.rates}
+                userLanguages={this.state.userLanguages}
                 languages={this.state.languages}
-                // user={this.state.user}
                 users={this.state.users}
                 updateUser={this.updateUser}
-                // constructNewUser={this.constructNewUser}
+                makeLanguageOptions={this.makeUserLanguageOptions}
+                postUserLanguageObj={this.postUserLanguageObj}
               />
             );
+          }}
+        />
+
+        <Route
+          path="/favDevs"
+          render={props => {
+            if (this.isAuthenticated()) {
+              return (
+               <FavDev
+                  {...props}
+                  user={this.state.users}
+                  languages={this.state.userLanguages}
+                  devCollection={this.state.devCollections}
+                  deleteFavDev={this.deleteFavDev}
+                />
+              );
+            } else {
+              return <Redirect to="/" />;
+            }
           }}
         />
 
@@ -146,7 +178,14 @@ class ApplicationViews extends Component {
           path="/devList"
           render={props => {
             if (this.isAuthenticated()) {
-              return <DevList {...props} users={this.state.users} />;
+              return (
+                <DevList
+                  {...props}
+                  users={this.state.users}
+                  languages={this.state.userLanguages}
+                  devCollection={this.state.devCollections}
+                />
+              );
             } else {
               return <Redirect to="/" />;
             }
