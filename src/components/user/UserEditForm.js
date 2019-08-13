@@ -6,6 +6,7 @@ export default class UserEditForm extends Component {
   // Set initial state
   state = {
     name: "",
+    image: "",
     rates: "",
     email: "",
     githubLink: "",
@@ -28,6 +29,7 @@ export default class UserEditForm extends Component {
   updateUser = () => {
     let user = {
       name: this.state.name,
+      image: this.state.image,
       email: this.state.email,
       password: this.state.password,
       rates: this.state.rates,
@@ -109,7 +111,7 @@ export default class UserEditForm extends Component {
     return (
       <React.Fragment>
         <h1>
-          Hello {currentUser.name}, this is where you edit your awesome profile.
+          Hello {currentUser.name}, this is where you edit your portfolio.
         </h1>
         <form className="userEditForm card">
           <label className="form-group" htmlFor="inputName">
@@ -125,6 +127,16 @@ export default class UserEditForm extends Component {
             className="form-control"
           />
           <br />
+          <label htmlFor="inputImage">Update Your Picture:&nbsp;</label>
+          <input
+            onChange={this.handleFieldChange}
+            type="text"
+            id="image"
+            placeholder="Image"
+            className="form-control"
+            autoFocus=""
+          />
+          <br />
           <label className="form-group" htmlFor="inputEmail">
             Email address:&nbsp;
           </label>
@@ -138,17 +150,6 @@ export default class UserEditForm extends Component {
             className="form-control"
           />
           <br />
-          {/* <label className="form-group" htmlFor="inputPassword">
-            Password:&nbsp;
-          </label> */}
-          {/* <input
-            onChange={this.handleFieldChange}
-            type="password"
-            id="password"
-            placeholder="Password"
-            required=""
-            className="form-control"
-          /> */}
           <div>
             <label htmlFor="languages">Select Known Languages</label>
             <Dropdown
@@ -162,14 +163,15 @@ export default class UserEditForm extends Component {
               id="languages"
             />
           </div>
+          <br />
           <div className="form-group">
-            <label htmlFor="apps">Github link</label>
+            <label htmlFor="githubLink">Github link</label>
             <input
               type="text"
               required
               className="form-control"
               onChange={this.handleFieldChange}
-              id="apps"
+              id="githubLink"
               placeholder={currentUser.githubLink}
             />
           </div>

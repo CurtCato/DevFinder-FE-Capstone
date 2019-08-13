@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Image } from "semantic-ui-react"
+
 
 export default class UserCard extends Component {
 
@@ -6,7 +8,10 @@ export default class UserCard extends Component {
     return (
       <div className="card userCard w-50 h-75 py-4 m-5 px-4 bg-light">
         <div className="card-body userBody">
-          <h1 className="card-title">Name: {this.props.user.name}</h1>
+          <h1 className="card-title">
+          <Image src={this.props.user.image} size="medium" circular centered/>
+          <span>{this.props.user.name}</span>
+          </h1>
           <h3 className="languagesKnown">
             Languages Known:
             {this.props.userLanguages.map(language => (
@@ -33,7 +38,7 @@ export default class UserCard extends Component {
           <button
             onClick={() => {
               if (
-                window.confirm("Are you sure you wish to delete your account?")
+                window.confirm("Are you sure you wish to delete your portfolio?")
               )
                 this.props
                   .deleteUser(this.props.user.id)

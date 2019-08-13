@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import APIManager from "../../APIManager/APIManager";
 import { Dropdown } from "semantic-ui-react";
 
+
 export default class Register extends Component {
   state = {
     name: "",
+    image: "",
     rates: "",
     email: "",
     githubLink: "",
@@ -41,6 +43,7 @@ export default class Register extends Component {
       } else {
         let newUser = {
           name: this.state.name,
+          image: this.state.image,
           email: this.state.email,
           password: this.state.password,
           rates: this.state.rates,
@@ -128,6 +131,16 @@ export default class Register extends Component {
           placeholder="Name"
           className="form-control"
           required=""
+          autoFocus=""
+        />
+        <br />
+        <label htmlFor="inputImage">Link to Your Picture:&nbsp;</label>
+        <input
+          onChange={this.handleFieldChange}
+          type="text"
+          id="image"
+          placeholder="Image"
+          className="form-control"
           autoFocus=""
         />
         <br />

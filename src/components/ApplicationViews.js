@@ -163,7 +163,7 @@ class ApplicationViews extends Component {
                <FavDev
                   {...props}
                   user={this.state.users}
-                  languages={this.state.userLanguages}
+                  userLanguages={this.state.userLanguages}
                   devCollection={this.state.devCollections}
                   deleteFavDev={this.deleteFavDev}
                 />
@@ -182,7 +182,8 @@ class ApplicationViews extends Component {
                 <DevList
                   {...props}
                   users={this.state.users}
-                  languages={this.state.userLanguages}
+                  languages={this.state.languages}
+                  userLanguages={this.state.userLanguages}
                   devCollection={this.state.devCollections}
                 />
               );
