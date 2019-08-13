@@ -33,9 +33,10 @@ export default class DevList extends Component {
 
   handleOptionsSelected = (event, { value }) => {
     event.preventDefault();
-    this.setState({ languages: value }, () =>
-      this.filterUsersByLanguage(event)
-    );
+    this.setState({ languages: value, users: [] }, () => {
+      console.log("this.state", this.state.users);
+      this.filterUsersByLanguage(event);
+    });
   };
 
   filterUsersByLanguage = () => {
@@ -48,12 +49,12 @@ export default class DevList extends Component {
           // console.log("userLanguage", userLanguage)
           return this.props.users.filter(
             user => user.id === userLanguage.userId
-            );
-          });
+          );
         });
-        const flattenedArr = [].concat(...userArr)
-        const evenFlatterArr = [].concat(...flattenedArr)
-    console.log("userArr", evenFlatterArr)
+    });
+    const flattenedArr = [].concat(...userArr);
+    const evenFlatterArr = [].concat(...flattenedArr);
+    console.log("userArr", evenFlatterArr);
     this.setState({ users: evenFlatterArr });
   };
 
