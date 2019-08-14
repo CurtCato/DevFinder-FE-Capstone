@@ -40,22 +40,30 @@ export default class DevList extends Component {
   };
 
   filterUsersByLanguage = () => {
-    // console.log("this.state.languages", this.state.languages);
     let userArr = this.state.languages.map(language => {
-      // console.log("language", language);
       return this.props.userLanguages
         .filter(userLanguage => language === userLanguage.languageId)
         .map(userLanguage => {
           // console.log("userLanguage", userLanguage)
           return this.props.users.filter(
             user => user.id === userLanguage.userId
-          );
-        });
+          )[0] //keeps us from having at least one extra level of arrays
+        })
     });
-    const flattenedArr = [].concat(...userArr);
-    const evenFlatterArr = [].concat(...flattenedArr);
-    console.log("userArr", evenFlatterArr);
-    this.setState({ users: evenFlatterArr });
+    const flattenedArr = userArr.flat() //flat() is new way of flattening an array!
+    .reduce( (objectsSoFar, currentObj) => { //all of this is for filtering out the duplicate users
+      console.log(objectsSoFar)
+      const user = objectsSoFar.find( obj => obj.id === currentObj.id)
+      if(!user) {
+        // add current object in loop to the array of objects we've examined so far in the loop
+        return objectsSoFar.concat([currentObj])
+      } else {
+        // basically skip the current obj and just keep moving through the array without it
+        return objectsSoFar
+      }
+    }, [])
+
+    this.setState({ users: flattenedArr });
   };
 
   render() {

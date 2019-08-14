@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import APIManager from "../../APIManager/APIManager";
-import { Image, Reveal } from "semantic-ui-react";
+import { Image, Reveal, Grid, Header } from "semantic-ui-react";
+import "./dev.css";
 
 export default class DevCard extends Component {
   state = {
@@ -23,59 +24,97 @@ export default class DevCard extends Component {
 
   render() {
     return (
-      <div className="card devCard w-25 py-3 px-3 m-5 bg-light">
-        <div className="card-body devBody w-100">
-          <h1 className="card-title">
-            <Reveal animated="rotate left">
+      <React.Fragment>
+        <style>
+          {`
+      card {
+        background-color: #252839 !important;
+      }
+      h3 {
+        align-content: center;
+        background-color: #495285;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 6em;
+      }
+      h3 > span {
+        opacity: 0.4;
+        text-align: center;
+      }
+    }
+    `}
+        </style>
+        <div className="card devCard w-25 py-3 px-3 m-5">
+          <div className="card-body devBody w-100">
+            <Reveal animated="move up">
               <Reveal.Content visible>
                 <Image
-                  circular
-                  size="medium"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReI-t7NmQG_EuhsZlrpttC0vPnxnJU2etHtzS7shJ_Je699yHG"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWUuOGwktOwrSbBCdf_v8LUpu5QgJX9OMbposSz-c7T-KCuXsXnw"
+                  size="large"
+                  // circular
+                  centered
                 />
               </Reveal.Content>
               <Reveal.Content hidden>
                 <Image
                   src={this.props.user.image}
-                  size="medium"
-                  circular
+                  size="large"
+                  // circular
                   centered
                 />
               </Reveal.Content>
             </Reveal>
-            <span>{this.props.user.name}</span>
-          </h1>
-          <h3 className="card">
-            Languages Known:
-            {this.props.userLanguages
-              .filter(
-                userLanguage => userLanguage.userId === this.props.user.id
-              )
-              .map(userLanguage => {
-                return (
-                  <div key={userLanguage.id}>
-                    - {userLanguage.language.text}
-                  </div>
-                );
-              })}
-          </h3>
-          <h3>GitHub Link: {this.props.user.githubLink}</h3>
-          <h3>Hourly Rate: {this.props.user.rates}</h3>
-          <h3>Email Address: {this.props.user.email}</h3>
-          <h3>Location: {this.props.user.location}</h3>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => {
-              this.saveDev();
-              console.log(this.props.user);
-              // console.log(this.props.match.params);
-            }}
-          >
-            Save Dev
-          </button>
+            <Header as="h1" inverted textAlign="center">
+              {this.props.user.name}
+            </Header>
+            <h3 className="languagesKnown">
+              <u>Languages Known:</u>
+              {this.props.userLanguages
+                .filter(
+                  userLanguage => userLanguage.userId === this.props.user.id
+                )
+                .map(userLanguage => {
+                  return (
+                    <div key={userLanguage.id}>
+                      - {userLanguage.language.text}
+                    </div>
+                  );
+                })}
+            </h3>
+            <Grid celled="internally" columns={2}>
+              <Grid.Row>
+                <Grid.Column>
+                  <h3><i>GitHub Link:</i> <a href="#">{this.props.user.githubLink}</a></h3>
+                </Grid.Column>
+                <Grid.Column>
+                  <h3><i>Hourly Rate:</i> {this.props.user.rates}</h3>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column>
+                  <h3><i>Email Address:</i> <a href="#">{this.props.user.email}</a></h3>
+                </Grid.Column>
+                <Grid.Column>
+                  <h3><i>Location:</i> {this.props.user.location}</h3>
+                </Grid.Column>
+              </Grid.Row>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  this.saveDev();
+                  console.log(this.props.user);
+                  // console.log(this.props.match.params);
+                }}
+              >
+                Save Dev
+              </button>
+            </Grid>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

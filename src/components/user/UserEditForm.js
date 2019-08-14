@@ -110,10 +110,11 @@ export default class UserEditForm extends Component {
     console.log(this.languageOptions);
     return (
       <React.Fragment>
+        <div className="editForm">
         <h1>
           Hello {currentUser.name}, this is where you edit your portfolio.
         </h1>
-        <form className="userEditForm card">
+        <form className="userEditForm">
           <label className="form-group" htmlFor="inputName">
             Name:&nbsp;
           </label>
@@ -208,6 +209,7 @@ export default class UserEditForm extends Component {
             Submit
           </button>
         </form>
+        </div>
       </React.Fragment>
     );
   }
