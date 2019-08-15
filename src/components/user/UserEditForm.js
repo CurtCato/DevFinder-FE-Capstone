@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Dropdown } from "semantic-ui-react";
+import "../dev/dev.css";
 import APIManager from "../../APIManager/APIManager";
+import { tsImportEqualsDeclaration } from "@babel/types";
 
 export default class UserEditForm extends Component {
   // Set initial state
@@ -9,11 +11,29 @@ export default class UserEditForm extends Component {
     image: "",
     rates: "",
     email: "",
+    password: "",
     githubLink: "",
     location: "",
     userLanguages: "",
+    languages: [],
     id: parseInt(sessionStorage.getItem("userId"))
   };
+
+  componentDidMount() {
+    APIManager.get("users", this.props.match.params.userId).then(user => {
+      this.setState({
+        name: user.name,
+        image: user.image,
+        rates: user.rates,
+        email: user.email,
+        password: user.password,
+        githubLink: user.githubLink,
+        location: user.location,
+        userLanguages: user.userLanguages,
+        id: user.id
+      });
+    });
+  }
 
   handleFieldChange = evt => {
     const stateToChange = {};
@@ -43,8 +63,7 @@ export default class UserEditForm extends Component {
       obj.userId = parseInt(sessionStorage.getItem("userId"));
       this.props.postUserLanguageObj(obj);
     });
-    this.props.updateUser(user);
-    this.props.history.push("/user");
+    this.props.updateUser(user).then(() => this.props.history.push("/user"));
   };
 
   rateOptions = [];
@@ -89,70 +108,62 @@ export default class UserEditForm extends Component {
     return acc;
   }, []);
 
-  findUser = () => {
-    let currentUser = "";
-    this.props.users.forEach(user => {
-      if (user.id === parseInt(sessionStorage.getItem("userId"))) {
-        currentUser = user;
-      }
-    });
-    return currentUser;
-  };
-
   render() {
-    // if (this.languageOptions.length === 0) {
-    //   this.makeLanguageOptions();
-    // }
     if (this.rateOptions.length === 0) {
       this.makeRateOptions();
     }
-    let currentUser = this.findUser();
     console.log(this.languageOptions);
     return (
       <React.Fragment>
         <div className="editForm">
-        <h1>
-          Hello {currentUser.name}, this is where you edit your portfolio.
-        </h1>
-        <form className="userEditForm">
-          <label className="form-group" htmlFor="inputName">
-            Name:&nbsp;
-          </label>
-          <input
-            onChange={this.handleFieldChange}
-            type="name"
-            id="name"
-            placeholder={currentUser.name}
-            required=""
-            autoFocus=""
-            className="form-control"
-          />
-          <br />
-          <label htmlFor="inputImage">Update Your Picture:&nbsp;</label>
-          <input
-            onChange={this.handleFieldChange}
-            type="text"
-            id="image"
-            placeholder="Image"
-            className="form-control"
-            autoFocus=""
-          />
-          <br />
-          <label className="form-group" htmlFor="inputEmail">
-            Email address:&nbsp;
-          </label>
-          <input
-            onChange={this.handleFieldChange}
-            type="email"
-            id="email"
-            placeholder={currentUser.email}
-            required=""
-            autoFocus=""
-            className="form-control"
-          />
-          <br />
-          <div>
-            <label htmlFor="languages">Select Known Languages</label>
+          <h1 className="heading">
+            Hello {this.state.name}, this is where you edit your portfolio.
+          </h1>
+          {/* <form className="userEditForm"> */}
+            <label className="form-group" htmlFor="inputName">
+              Name
+            </label>
+            <input
+              onChange={this.handleFieldChange}
+              type="name"
+              id="name"
+              value={this.state.name}
+              // placeholder={currentUser.name}
+              required=""
+              autoFocus=""
+              className="form-control"
+            />
+            <br />
+            <label className="form-group" htmlFor="inputImage">
+              Update Your Picture
+            </label>
+            <input
+              onChange={this.handleFieldChange}
+              type="text"
+              id="image"
+              value={this.state.image}
+              // placeholder={currentUser.image}
+              className="form-control"
+              autoFocus=""
+            />
+            <br />
+            <label className="form-group" htmlFor="inputEmail">
+              Email address
+            </label>
+            <input
+              onChange={this.handleFieldChange}
+              type="email"
+              id="email"
+              value={this.state.email}
+              // placeholder={currentUser.email}
+              required=""
+              autoFocus=""
+              className="form-control"
+            />
+            <br />
+            <label className="form-group" htmlFor="languages">
+              Select Known Languages
+            </label>
             <Dropdown
               placeholder=""
               fluid
@@ -163,23 +174,26 @@ export default class UserEditForm extends Component {
               onChange={this.handleOptionsSelected}
               id="languages"
             />
-          </div>
-          <br />
-          <div className="form-group">
-            <label htmlFor="githubLink">Github link</label>
+            <br />
+            <label className="form-group" htmlFor="githubLink">
+              Github link
+            </label>
             <input
               type="text"
               required
               className="form-control"
               onChange={this.handleFieldChange}
               id="githubLink"
-              placeholder={currentUser.githubLink}
+              value={this.state.githubLink}
+              // placeholder={currentUser.githubLink}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="rate">Desired Hourly Rate</label>
+            <br />
+            <label className="form-group" htmlFor="rate">
+              Desired Hourly Rate
+            </label>
             <Dropdown
-              placeholder={currentUser.rates}
+              // placeholder={currentUser.rates}
+              value={this.state.rates}
               fluid
               selection
               className="form-control"
@@ -187,28 +201,30 @@ export default class UserEditForm extends Component {
               onChange={this.handleOptionSelected}
               id="rates"
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="location">Location</label>
+            <br />
+            <label className="form-group" htmlFor="location">
+              Location
+            </label>
             <input
               type="text"
               required
               className="form-control"
               onChange={this.handleFieldChange}
               id="location"
-              placeholder={currentUser.location}
+              value={this.state.location}
+              // placeholder={currentUser.location}
             />
-          </div>
-          <button
-            type="submit"
-            onClick={() => {
-              this.updateUser();
-            }}
-            className="btn btn-primary"
-          >
-            Submit
-          </button>
-        </form>
+            <br />
+            <button
+              // type="submit"
+              onClick={() => {
+                this.updateUser();
+              }}
+              className="btn btn-primary"
+            >
+              Submit
+            </button>
+          {/* </form> */}
         </div>
       </React.Fragment>
     );

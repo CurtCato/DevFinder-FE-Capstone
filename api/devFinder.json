@@ -15,32 +15,22 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoeopGlXBk-9fSXFepoumZW9OOEySDg-QqgEJiPyHf4Sd0YdD",
       "email": "lindsay@lindsay.com",
       "password": "landsay",
-      "rates": "$10-$20",
+      "rates": "$21-$30",
       "githubLink": "www.github.com",
-      "location": "location",
+      "location": "Nashville",
       "id": 4
     }
   ],
   "userLanguages": [
     {
       "languageId": 1,
-      "userId": 3,
-      "id": 6
-    },
-    {
-      "languageId": 2,
-      "userId": 3,
-      "id": 7
-    },
-    {
-      "languageId": 3,
-      "userId": 3,
-      "id": 8
-    },
-    {
-      "languageId": 1,
       "userId": 4,
-      "id": 9
+      "id": 1
+    },
+    {
+      "languageId": 4,
+      "userId": 4,
+      "id": 2
     }
   ],
   "jobsCompleted": [],

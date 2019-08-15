@@ -75,9 +75,9 @@ export default class DevList extends Component {
         <section className="cardContainer">
           <div>
             <br />
-            <label htmlFor="languages">
-              <h2>Filter Options by Languages Known</h2>
-            </label>
+            {/* <label htmlFor="languages"> */}
+              <h2 className="heading">Filter Options by Languages Known</h2>
+            {/* </label> */}
             <Dropdown
               placeholder=""
               fluid
@@ -93,6 +93,7 @@ export default class DevList extends Component {
             {this.state.users.map(user => (
               <DevCard
                 key={user.id}
+                addDevOfInterest={this.props.addDevOfInterest}
                 user={user}
                 devCollections={this.props.devCollections}
                 languages={this.props.languages}

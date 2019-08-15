@@ -6,6 +6,7 @@ export default class FavDev extends Component {
   render() {
     return (
       <React.Fragment>
+        <h1 className="heading">Here Are Your Favorite Devs</h1>
         <div className="devCardContainer">
           <style>
             {`

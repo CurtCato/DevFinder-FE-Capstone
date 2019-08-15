@@ -119,11 +119,11 @@ export default class Register extends Component {
       this.makeRateOptions();
     }
     return (
-      <form className="card" onSubmit={this.handleRegister}>
-        <h1 className="h3 mb-3 font-weight-normal">
+      <form onSubmit={this.handleRegister}>
+        <h1 className="heading">
           Please Create Your User Portfolio
         </h1>
-        <label htmlFor="inputName">Name:&nbsp;</label>
+        <label className="form-group" htmlFor="inputName">Name:&nbsp;</label>
         <input
           onChange={this.handleFieldChange}
           type="name"
@@ -134,7 +134,7 @@ export default class Register extends Component {
           autoFocus=""
         />
         <br />
-        <label htmlFor="inputImage">Link to Your Picture:&nbsp;</label>
+        <label className="form-group" htmlFor="inputImage">Link to Your Picture:&nbsp;</label>
         <input
           onChange={this.handleFieldChange}
           type="text"
@@ -144,7 +144,7 @@ export default class Register extends Component {
           autoFocus=""
         />
         <br />
-        <label htmlFor="inputEmail">Email address:&nbsp;</label>
+        <label className="form-group" htmlFor="inputEmail">Email address:&nbsp;</label>
         <input
           onChange={this.handleFieldChange}
           type="email"
@@ -155,7 +155,7 @@ export default class Register extends Component {
           autoFocus=""
         />
         <br />
-        <label htmlFor="inputPassword">Password:&nbsp;</label>
+        <label className="form-group" htmlFor="inputPassword">Password:&nbsp;</label>
         <input
           onChange={this.handleFieldChange}
           type="password"
@@ -166,7 +166,7 @@ export default class Register extends Component {
         />
         <br />
         <div>
-          <label htmlFor="languages">Select Known Languages:&nbsp;</label>
+          <label className="form-group" htmlFor="languages">Select Known Languages:&nbsp;</label>
           <Dropdown
             placeholder="Languages Known"
             fluid
@@ -179,8 +179,7 @@ export default class Register extends Component {
           <br />
         </div>
         <br />
-        <div className="form-group">
-          <label htmlFor="github">Github link</label>
+          <label className="form-group" htmlFor="github">Github link</label>
           <input
             type="text"
             required
@@ -189,10 +188,8 @@ export default class Register extends Component {
             onChange={this.handleFieldChange}
             id="githubLink"
           />
-        </div>
         <br />
-        <div className="form-group">
-          <label htmlFor="rate">Desired Hourly Rate&nbsp;</label>
+          <label className="form-group" htmlFor="rate">Desired Hourly Rate&nbsp;</label>
           <Dropdown
             placeholder="Hourly Rate Desired"
             fluid
@@ -202,9 +199,7 @@ export default class Register extends Component {
             id="rates"
           />
           <br />
-        </div>
-        <div className="form-group">
-          <label htmlFor="location">Location&nbsp;</label>
+          <label className="form-group" htmlFor="location">Location&nbsp;</label>
           <input
             type="text"
             required
@@ -213,7 +208,6 @@ export default class Register extends Component {
             id="location"
             placeholder="Location"
           />
-        </div>
         <br />
         <button type="submit" className="btn btn-info btn-sm login-button">
           Register

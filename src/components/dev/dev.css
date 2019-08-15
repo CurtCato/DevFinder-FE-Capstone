@@ -22,3 +22,14 @@
     justify-content: center;
     text-align: center;
 }
+
+.heading {
+    text-align: center;
+    color: white;
+    /* background-color: greenyellow; */
+}
+
+.form-group {
+    color: white;
+    background-color: black;
+}

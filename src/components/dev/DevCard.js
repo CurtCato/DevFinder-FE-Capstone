@@ -15,11 +15,7 @@ export default class DevCard extends Component {
       currentUserId: parseInt(sessionStorage.getItem("userId")),
       userId: this.props.user.id
     };
-    this.addDevOfInterest(favDev);
-  };
-
-  addDevOfInterest = obj => {
-    APIManager.post(obj, "devCollections");
+    this.props.addDevOfInterest(favDev);
   };
 
   render() {
@@ -105,8 +101,8 @@ export default class DevCard extends Component {
                 className="btn btn-primary"
                 onClick={() => {
                   this.saveDev();
+                  // window.location.reload()
                   console.log(this.props.user);
-                  // console.log(this.props.match.params);
                 }}
               >
                 Save Dev
