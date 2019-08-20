@@ -34,12 +34,9 @@ class ApplicationViews extends Component {
       .then(rates => (newState.rates = rates))
       .then(() => APIManager.getAllExpand("userLanguages", "user", "language"))
       .then(userLanguages => (newState.userLanguages = userLanguages))
-      // .then(() => APIManager.getAll("devCollection"))
-      // .then(devCollection => (newState.devCollection = devCollection))
       .then(() => APIManager.getDevsExpand("devCollections", "user"))
       .then(devCollections => (newState.devCollections = devCollections))
-      .then(console.log("new state", newState))
-      .then(() => this.setState(newState));
+      .then(() => this.setState(newState))
   }
 
   addUser = user => {
@@ -67,10 +64,20 @@ class ApplicationViews extends Component {
 
   deleteFavDev = id => {
     return APIManager.delete("devCollections", id)
-    .then (() => dev => {
-      this.setState({ dev : dev })
+    .then(() => APIManager.getDevsExpand("devCollections", "user"))
+    .then (devCollections => {
+      this.setState({ devCollections : devCollections })
     })
   }
+
+  addDevOfInterest = obj => {
+    const newState = {}
+    return APIManager.post(obj, "devCollections")
+    .then(() => APIManager.getDevsExpand("devCollections", "user"))
+    .then(devCollections => (newState.devCollections = devCollections))
+    .then(() => this.setState(newState))
+    .then(console.log("new state", newState))
+  };
 
   postUserLanguageObj = obj => {
     return APIManager.post(obj, "userLanguages")
@@ -146,7 +153,6 @@ class ApplicationViews extends Component {
                 rates={this.state.rates}
                 userLanguages={this.state.userLanguages}
                 languages={this.state.languages}
-                users={this.state.users}
                 updateUser={this.updateUser}
                 makeLanguageOptions={this.makeUserLanguageOptions}
                 postUserLanguageObj={this.postUserLanguageObj}
@@ -163,7 +169,7 @@ class ApplicationViews extends Component {
                <FavDev
                   {...props}
                   user={this.state.users}
-                  languages={this.state.userLanguages}
+                  userLanguages={this.state.userLanguages}
                   devCollection={this.state.devCollections}
                   deleteFavDev={this.deleteFavDev}
                 />
@@ -181,8 +187,10 @@ class ApplicationViews extends Component {
               return (
                 <DevList
                   {...props}
+                  addDevOfInterest={this.addDevOfInterest}
                   users={this.state.users}
-                  languages={this.state.userLanguages}
+                  languages={this.state.languages}
+                  userLanguages={this.state.userLanguages}
                   devCollection={this.state.devCollections}
                 />
               );

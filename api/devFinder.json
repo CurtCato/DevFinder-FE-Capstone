@@ -1,189 +1,76 @@
 {
   "users": [
     {
-      "name": "Joe",
-      "email": "joe@joe.com",
-      "rates": "$41-$50",
-      "githubLink": "",
-      "location": "NSS",
-      "id": 1
-    },
-    {
-      "name": "Curt Cato",
-      "email": "ccato829@gmail.com",
-      "password": "curt",
-      "rates": "$21-$30",
-      "githubLink": "www.github.com",
-      "location": "NSS",
-      "id": 2
-    },
-    {
-      "name": "dude",
-      "email": "dude@dude.com",
-      "password": "dude",
+      "name": "Lindsay",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoeopGlXBk-9fSXFepoumZW9OOEySDg-QqgEJiPyHf4Sd0YdD",
+      "email": "lindsay@lindsay.com",
+      "password": "lindsay",
       "rates": "$31-$40",
       "githubLink": "www.github.com",
-      "location": "location",
-      "id": 3
-    },
-    {
-      "name": "Curt Cato",
-      "email": "blah@blah.com",
-      "password": "password",
-      "rates": "$21-$30",
-      "githubLink": "www.github.com",
-      "location": "location",
+      "location": "Nashville",
       "id": 4
     },
     {
-      "name": "cheese",
-      "email": "cheese@cheese.com",
-      "password": "cheese",
-      "rates": "$10-$20",
+      "name": "Dude Gotem",
+      "image": "data:image/jpeg;base64,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",
+      "email": "gotem@gotem.com",
+      "password": "gotem",
+      "rates": "$31-$40",
       "githubLink": "www.github.com",
-      "location": "NSS",
+      "location": "Nashville",
       "id": 5
     },
     {
-      "name": "key",
-      "email": "key@key.com",
-      "password": "key",
+      "name": "Drew",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWdpGwM_7qc86xPkJL7cGONNZYrlHFOMgShDNPxrQE_T8fTKxJ4Q",
+      "email": "drew@drew.com",
+      "password": "drew",
       "rates": "$31-$40",
       "githubLink": "www.github.com",
-      "location": "location",
+      "location": "Nashville",
       "id": 6
-    },
-    {
-      "name": "mark",
-      "email": "mark@mark.com",
-      "rates": "$31-$40",
-      "githubLink": "",
-      "location": "NSS",
-      "id": 7
-    },
-    {
-      "name": "mathew",
-      "email": "mathew@mathew.com",
-      "password": "mathew",
-      "rates": "$10-$20",
-      "githubLink": "www.github.com",
-      "location": "location",
-      "id": 8
-    },
-    {
-      "name": "name",
-      "email": "name@name.com",
-      "password": "name",
-      "rates": "$21-$30",
-      "githubLink": "www.github.com",
-      "location": "location",
-      "id": 10
-    },
-    {
-      "name": "name",
-      "email": "name@n.com",
-      "password": "name",
-      "rates": "$10-$20",
-      "githubLink": "www.github.com",
-      "location": "NSS",
-      "id": 11
     }
   ],
   "userLanguages": [
     {
       "languageId": 1,
-      "userId": 1,
+      "userId": 4,
       "id": 1
     },
     {
-      "languageId": 2,
-      "userId": 1,
+      "languageId": 4,
+      "userId": 4,
       "id": 2
     },
     {
-      "languageId": 4,
-      "userId": 1,
+      "languageId": 2,
+      "userId": 4,
       "id": 3
     },
     {
-      "languageId": 5,
-      "userId": 1,
+      "languageId": 1,
+      "userId": 5,
       "id": 4
-    },
-    {
-      "languageId": 3,
-      "userId": 1,
-      "id": 5
-    },
-    {
-      "languageId": 1,
-      "userId": 2,
-      "id": 6
-    },
-    {
-      "languageId": 1,
-      "userId": 3,
-      "id": 7
-    },
-    {
-      "languageId": 1,
-      "userId": 4,
-      "id": 8
     },
     {
       "languageId": 2,
       "userId": 5,
-      "id": 9
+      "id": 5
+    },
+    {
+      "languageId": 3,
+      "userId": 5,
+      "id": 6
+    },
+    {
+      "languageId": 3,
+      "userId": 6,
+      "id": 7
     },
     {
       "languageId": 1,
       "userId": 6,
-      "id": 10
-    },
-    {
-      "languageId": 2,
-      "userId": 6,
-      "id": 11
-    },
-    {
-      "languageId": 1,
-      "userId": 7,
-      "id": 12
-    },
-    {
-      "languageId": 2,
-      "userId": 7,
-      "id": 13
-    },
-    {
-      "languageId": 1,
-      "userId": 8,
-      "id": 14
-    },
-    {
-      "languageId": 2,
-      "userId": 8,
-      "id": 15
-    },
-    {
-      "languageId": 3,
-      "userId": 8,
-      "id": 16
-    },
-    {
-      "languageId": 3,
-      "userId": 7,
-      "id": 17
-    },
-    {
-      "languageId": 1,
-      "userId": 10,
-      "id": 18
-    },
-    {
-      "languageId": 2,
-      "userId": 10,
-      "id": 19
+      "id": 8
     }
   ],
   "jobsCompleted": [],
@@ -207,9 +94,9 @@
       "id": 3
     },
     {
-      "text": "C-Sharp",
-      "value": "C-sharp",
-      "key": "C-sharp",
+      "text": "C#",
+      "value": "C#",
+      "key": "C#",
       "id": 4
     },
     {
@@ -221,9 +108,29 @@
   ],
   "devCollections": [
     {
-      "currentUserId": 10,
-      "userId": 2,
+      "currentUserId": 4,
+      "userId": 4,
+      "id": 1
+    },
+    {
+      "currentUserId": 5,
+      "userId": 4,
       "id": 2
+    },
+    {
+      "currentUserId": 6,
+      "userId": 4,
+      "id": 3
+    },
+    {
+      "currentUserId": 3,
+      "userId": 4,
+      "id": 4
+    },
+    {
+      "currentUserId": 3,
+      "userId": 6,
+      "id": 5
     }
   ],
   "rates": [
