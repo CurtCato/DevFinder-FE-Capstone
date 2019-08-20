@@ -51,7 +51,7 @@ export default class Login extends Component {
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" color="teal" textAlign="center">
-            <Image src="/logo.png" /> Log-in to your account
+            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXRuDX4pUNu_nD4-JD0ra2RSIMRS-BhXfq-xYEH9V9nG7Uk7vg7g" /> Log-in to your account
           </Header>
           <Form size="large">
             <Segment stacked>
