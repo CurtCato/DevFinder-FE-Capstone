@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+In a terminal, you will need to run a json server. While in the "api" directory, run this command:
+
+###  json-server -w devFinder.json -p 5002
+
 In the project directory, you can run:
 
 ### `npm start`
