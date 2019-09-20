@@ -25,10 +25,30 @@
       "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWdpGwM_7qc86xPkJL7cGONNZYrlHFOMgShDNPxrQE_T8fTKxJ4Q",
       "email": "drew@drew.com",
       "password": "drew",
-      "rates": "$31-$40",
+      "rates": "$51-$60",
       "githubLink": "www.github.com",
       "location": "Nashville",
       "id": 6
+    },
+    {
+      "name": "craig",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGoeopGlXBk-9fSXFepoumZW9OOEySDg-QqgEJiPyHf4Sd0YdD",
+      "email": "craig@craig.com",
+      "password": "craig",
+      "rates": "$71-$80",
+      "githubLink": "www.github.com",
+      "location": "Nashville",
+      "id": 7
+    },
+    {
+      "name": "steve",
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEBUQEBAVFhUVFQ8WFhYVFRAVFRcVFRUWFhUXFRYYHSggGBolGxYVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGhAQGi0lICUrNS0tLS0tLS0tLS0rLS0tLSstLS0rLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAACAAEDBQYEBwj/xAA/EAABAwIEAwUHAgUCBQUAAAABAAIRAwQFEiExQVFhBiJxgZETMqGxwdHwB+EUI0JSgnKyQ2KSwvEkM3Ois//EABkBAQADAQEAAAAAAAAAAAAAAAABAgMEBf/EACQRAQEAAgMAAgICAwEAAAAAAAABAhEDITESQTJREyIUUnEE/9oADAMBAAIRAxEAPwCxATgJAIoQMAnhOAnhA0JwE8J4QNCUIoTwgGEoRQlCAYShFCeEEcJQuW6xOlT/AKpPIKju+0jzpTpx1P7qtzkXmFrSwmIWNq4nWOrqpHnHy0UtpidZ5AY8mN5Dfjpsq/yRb+KtYmIVdUxmnT0qmHQDA1mRyU1jilKt7jteREFX+UUuNjqhMjTEKVQEJkaEhABCZGhIQCmRJkDJk6ZAkkkkHYAnASARQgYBFCcBOAgYBPCKE4CAYTwihPCAIShHCjuazabC95Aa0SSUEN7dNosL3nTh1PALI3+L1KxOpa3kNJT4jfG5OciGCcjOnN3U/suCsfzb8C5889+Onj49eoKtw6Dl9T9yqi6uxxqEnkBmR4jcSY3+Q8AqirTd/cB4kD4KMYtlXbbVPaODQT5kj6x6rSWlwy2bIJzngQsrhjYeBMjpH4VfPAAMN6D76qcojHYqVY1Hl7xrzE/Lirq0sngCrSEneP7hyHIqtsrXOO6dd5BkHoeRWowqoGt1B69Ov5vHNZZVpIsbS4FRjXDiPORuDyIUs",
+      "email": "steve@jobs.com",
+      "password": "password",
+      "rates": "$31-$40",
+      "githubLink": "www.github.com",
+      "location": "Nashville",
+      "id": 8
     }
   ],
   "userLanguages": [
@@ -71,6 +91,46 @@
       "languageId": 1,
       "userId": 6,
       "id": 8
+    },
+    {
+      "languageId": 4,
+      "userId": 6,
+      "id": 9
+    },
+    {
+      "languageId": 5,
+      "userId": 6,
+      "id": 10
+    },
+    {
+      "languageId": 1,
+      "userId": 7,
+      "id": 11
+    },
+    {
+      "languageId": 2,
+      "userId": 7,
+      "id": 12
+    },
+    {
+      "languageId": 3,
+      "userId": 7,
+      "id": 13
+    },
+    {
+      "languageId": 4,
+      "userId": 7,
+      "id": 14
+    },
+    {
+      "languageId": 1,
+      "userId": 8,
+      "id": 15
+    },
+    {
+      "languageId": 3,
+      "userId": 8,
+      "id": 16
     }
   ],
   "jobsCompleted": [],
@@ -131,6 +191,11 @@
       "currentUserId": 3,
       "userId": 6,
       "id": 5
+    },
+    {
+      "currentUserId": 8,
+      "userId": 4,
+      "id": 6
     }
   ],
   "rates": [
